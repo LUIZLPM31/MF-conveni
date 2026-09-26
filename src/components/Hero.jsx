@@ -1,32 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Snowflake, 
   Clock, 
   ShieldCheck, 
   ArrowDown, 
   Sparkles, 
-  Beer, 
-  CupSoda, 
-  Cookie, 
-  Flame, 
   MessageCircle,
   MapPin,
   CheckCircle2
 } from 'lucide-react';
 import Logo from './Logo';
-import { STORE_CONFIG, BANNER_HIGHLIGHTS } from '../data/products';
+import { STORE_CONFIG } from '../data/products';
 
 export default function Hero({ onExploreClick, onSelectCategory }) {
-  const [activeHighlight, setActiveHighlight] = useState(null);
-
-  const handleBannerTagClick = (category) => {
-    if (onSelectCategory) {
-      onSelectCategory(category);
-    }
-    if (onExploreClick) {
-      onExploreClick();
-    }
-  };
 
   return (
     <section className="relative overflow-hidden bg-[#0c0e13] border-b border-stone-800/80">
@@ -202,113 +188,6 @@ export default function Hero({ onExploreClick, onSelectCategory }) {
           </div>
 
         </div>
-
-        {/* Bloco Inferior: Categorias em Destaque */}
-        <div className="pt-2">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
-                Categorias em Destaque
-              </span>
-              <h2 className="text-xl sm:text-2xl font-black text-stone-100">
-                O que você encontra na MF Conveniências
-              </h2>
-            </div>
-            <p className="text-xs text-stone-400">
-              Clique para navegar direto no cardápio
-            </p>
-          </div>
-
-          {/* Cards de Atalho Padronizados (rounded-xl) */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            
-            {/* 1. Cervejas & Balde de Gelo */}
-            <div
-              onClick={() => handleBannerTagClick('cervejas')}
-              className="p-4 rounded-xl bg-stone-900/60 hover:bg-stone-900 border border-stone-800/80 hover:border-amber-500/40 transition-all duration-200 cursor-pointer group shadow-sm"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Beer className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-800 text-stone-300 border border-stone-700">
-                  Super Gelada
-                </span>
-              </div>
-              <h3 className="text-sm font-bold text-stone-100 group-hover:text-amber-400 transition-colors">
-                Cervejas & Balde
-              </h3>
-              <p className="text-[11px] text-stone-400 mt-0.5">
-                Heineken, Bud, Corona, Spaten & Chopp
-              </p>
-            </div>
-
-            {/* 2. Refrigerantes 2 Litros */}
-            <div
-              onClick={() => handleBannerTagClick('refrigerantes')}
-              className="p-4 rounded-xl bg-stone-900/60 hover:bg-stone-900 border border-stone-800/80 hover:border-amber-500/40 transition-all duration-200 cursor-pointer group shadow-sm"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="w-9 h-9 rounded-lg bg-stone-800 text-stone-300 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <CupSoda className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-800 text-stone-300 border border-stone-700">
-                  PET 2L & Latas
-                </span>
-              </div>
-              <h3 className="text-sm font-bold text-stone-100 group-hover:text-amber-400 transition-colors">
-                Coca, Fanta & Pepsi
-              </h3>
-              <p className="text-[11px] text-stone-400 mt-0.5">
-                Refrigerantes trincando e energéticos
-              </p>
-            </div>
-
-            {/* 3. Doritos, Ruffles & Trident */}
-            <div
-              onClick={() => handleBannerTagClick('petiscos')}
-              className="p-4 rounded-xl bg-stone-900/60 hover:bg-stone-900 border border-stone-800/80 hover:border-amber-500/40 transition-all duration-200 cursor-pointer group shadow-sm"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="w-9 h-9 rounded-lg bg-stone-800 text-stone-300 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Cookie className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-800 text-stone-300 border border-stone-700">
-                  Crocantes
-                </span>
-              </div>
-              <h3 className="text-sm font-bold text-stone-100 group-hover:text-amber-400 transition-colors">
-                Doritos, Ruffles & Trident
-              </h3>
-              <p className="text-[11px] text-stone-400 mt-0.5">
-                Salgadinhos originais e gomas de menta
-              </p>
-            </div>
-
-            {/* 4. Combos, Gelo & Carvão */}
-            <div
-              onClick={() => handleBannerTagClick('combos')}
-              className="p-4 rounded-xl bg-stone-900/60 hover:bg-stone-900 border border-stone-800/80 hover:border-amber-500/40 transition-all duration-200 cursor-pointer group shadow-sm"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="w-9 h-9 rounded-lg bg-stone-800 text-stone-300 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Flame className="w-5 h-5" />
-                </div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-800 text-stone-300 border border-stone-700">
-                  Econômico
-                </span>
-              </div>
-              <h3 className="text-sm font-bold text-stone-100 group-hover:text-amber-400 transition-colors">
-                Combos & Churrasco
-              </h3>
-              <p className="text-[11px] text-stone-400 mt-0.5">
-                Whisky, Gin, Gelo 5kg e Carvão 3kg
-              </p>
-            </div>
-
-          </div>
-        </div>
-
       </div>
     </section>
   );
