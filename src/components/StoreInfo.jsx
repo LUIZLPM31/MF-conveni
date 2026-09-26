@@ -1,24 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Clock, 
   MapPin, 
   CreditCard, 
   ShieldCheck, 
-  Navigation, 
-  Copy, 
-  Check 
+  Navigation
 } from 'lucide-react';
 import { STORE_CONFIG } from '../data/products';
 
 export default function StoreInfo() {
-  const [copiedPix, setCopiedPix] = useState(false);
-
-  const handleCopyPix = () => {
-    navigator.clipboard.writeText(STORE_CONFIG.pixKey);
-    setCopiedPix(true);
-    setTimeout(() => setCopiedPix(false), 2000);
-  };
-
   return (
     <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#1F2925]">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -106,53 +96,61 @@ export default function StoreInfo() {
           </div>
         </div>
 
-        {/* Card 3: Formas de Pagamento & Chave PIX */}
+        {/* Card 3: Formas de Pagamento (PIX e Cartão) */}
         <div className="p-6 rounded-2xl bg-[#121816] border border-[#1F2925] flex flex-col justify-between">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 p-2 rounded-xl bg-[#18B66A]/10 text-[#18B66A]">
               <CreditCard className="w-5 h-5" />
             </div>
 
-            <h3 className="text-xl font-bold text-[#F7F7F5] font-display">
-              Formas de Pagamento
-            </h3>
+            <div>
+              <h3 className="text-xl font-bold text-[#F7F7F5] font-display">
+                Formas de Pagamento
+              </h3>
+              <p className="text-xs text-[#A8B0AC] mt-1">
+                Facilitamos seu pagamento no balcão de forma rápida e segura:
+              </p>
+            </div>
 
-            <p className="text-xs text-[#A8B0AC]">
-              Facilitamos seu pagamento no balcão: PIX instantâneo, Cartão de Crédito/Débito ou Dinheiro.
-            </p>
-
-            {/* Box PIX */}
-            <div className="p-3 rounded-xl bg-[#0B0F0E] border border-[#1F2925] flex items-center justify-between gap-2">
-              <div className="min-w-0">
-                <span className="text-[10px] text-[#A8B0AC]/60 uppercase font-bold block">
-                  Chave PIX Oficial
-                </span>
-                <span className="text-xs font-mono text-[#18B66A] truncate block">
-                  {STORE_CONFIG.pixKey}
-                </span>
+            {/* Imagem / Bloco Visual PIX */}
+            <div className="p-3.5 rounded-xl bg-[#0B0F0E] border border-[#1F2925] hover:border-[#32BCAD]/40 transition-colors flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#32BCAD]/15 border border-[#32BCAD]/30 flex items-center justify-center flex-shrink-0 text-[#32BCAD]">
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 512 512">
+                  <path d="M112.5 124.1c13.7-13.7 32.3-21.4 51.7-21.4h37.4l-64.8 64.8c-12.5 12.5-12.5 32.8 0 45.3l74.5 74.5-74.5 74.5c-12.5 12.5-12.5 32.8 0 45.3l64.8 64.8h-37.4c-19.4 0-38-7.7-51.7-21.4L44.8 383.2c-28.5-28.5-28.5-74.7 0-103.2l67.7-155.9zM399.5 124.1l67.7 67.7c28.5 28.5 28.5 74.7 0 103.2l-67.7 67.7c-13.7 13.7-32.3 21.4-51.7 21.4h-37.4l64.8-64.8c12.5-12.5 12.5-32.8 0-45.3l-74.5-74.5 74.5-74.5c12.5-12.5 12.5-32.8 0-45.3l-64.8-64.8h37.4c19.4 0 38 7.7 51.7 21.4z"/>
+                  <path d="M217.2 233.4l38.8-38.8 38.8 38.8c12.5 12.5 32.8 12.5 45.3 0l45.9-45.9c3.2-3.2 4.9-7.5 4.9-12.1s-1.8-8.9-4.9-12.1l-92.4-92.4c-20.9-20.9-54.8-20.9-75.7 0l-92.4 92.4c-6.7 6.7-6.7 17.5 0 24.1l45.9 45.9c12.5 12.5 32.8 12.5 45.3 0l-14.2 2.9zm77.6 45.2l-38.8 38.8-38.8-38.8c-12.5-12.5-32.8-12.5-45.3 0l-45.9 45.9c-6.7 6.7-6.7 17.5 0 24.1l92.4 92.4c20.9 20.9 54.8 20.9 75.7 0l92.4-92.4c6.7-6.7 6.7-17.5 0-24.1l-45.9-45.9c-12.5-12.5-32.8-12.5-45.3 0z"/>
+                </svg>
               </div>
-              <button
-                onClick={handleCopyPix}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#18221E] hover:bg-[#1F2925] text-xs text-[#F7F7F5] transition-colors flex-shrink-0 cursor-pointer"
-              >
-                {copiedPix ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-[#18B66A]" />
-                    <span className="text-[#18B66A] font-semibold">Copiado</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>Copiar</span>
-                  </>
-                )}
-              </button>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-black text-[#F7F7F5] uppercase tracking-wider">PIX</span>
+                  <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-[#32BCAD]/15 text-[#32BCAD] border border-[#32BCAD]/30">Instantâneo</span>
+                </div>
+                <p className="text-[11px] text-[#A8B0AC] mt-0.5">Pagamento rápido via QR Code ou Chave no balcão</p>
+              </div>
+            </div>
+
+            {/* Imagem / Bloco Visual Cartão */}
+            <div className="p-3.5 rounded-xl bg-[#0B0F0E] border border-[#1F2925] hover:border-[#18B66A]/40 transition-colors flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#18B66A]/15 border border-[#18B66A]/30 flex items-center justify-center flex-shrink-0 text-[#18B66A]">
+                <CreditCard className="w-6 h-6" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="text-xs font-black text-[#F7F7F5] uppercase tracking-wider block">
+                  Cartão de Crédito & Débito
+                </span>
+                <div className="flex flex-wrap items-center gap-1.5 mt-1">
+                  <span className="px-1.5 py-0.5 rounded bg-[#121816] text-[10px] font-bold text-sky-400 border border-[#1F2925]">Visa</span>
+                  <span className="px-1.5 py-0.5 rounded bg-[#121816] text-[10px] font-bold text-amber-400 border border-[#1F2925]">Mastercard</span>
+                  <span className="px-1.5 py-0.5 rounded bg-[#121816] text-[10px] font-bold text-rose-400 border border-[#1F2925]">Elo</span>
+                  <span className="px-1.5 py-0.5 rounded bg-[#121816] text-[10px] font-bold text-[#18B66A] border border-[#1F2925]">Aproximação</span>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="mt-6 pt-4 border-t border-[#1F2925] flex items-center gap-2 text-xs text-[#A8B0AC]">
             <ShieldCheck className="w-4 h-4 text-[#18B66A] flex-shrink-0" />
-            <span>Pagamento 100% seguro no balcão ou via PIX.</span>
+            <span>Pagamento 100% seguro direto no balcão da conveniência.</span>
           </div>
         </div>
 
