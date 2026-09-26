@@ -1,13 +1,15 @@
 export const STORE_CONFIG = {
   name: "MF Conveniências",
   slogan: "Bebidas Geladas & Variedade ao Seu Alcance!",
-  whatsappNumber: "5511999999999", // Número configurável
+  whatsappNumber: "5551986101352", // Número configurável
+  instagram: "conveniencia_mf26",
+  instagramUrl: "https://www.instagram.com/conveniencia_mf26/",
   address: "Av. Vicente Monteggia, 2140",
   city: "Porto Alegre - RS",
-  googleMapsUrl: "", // Link direto opcional do Google Meu Negócio ou Maps
+  googleMapsUrl: "https://share.google/JMZOk0Qi1kspX5SlP",
   openingHours: {
     weekdays: "Segunda a Quinta: 16h às 00h",
-    weekend: "Sexta e Sábado: 14h às 03h",
+    weekend: "Sexta e Sábado: 14h às 04h (Madrugada)",
     sunday: "Domingo e Feriados: 11h às 23h",
     isOpenNow: true,
   },
@@ -28,8 +30,56 @@ export const CATEGORIES = [
   { id: 'gelo-churrasco', label: 'Gelo, Carvão & Acessórios', icon: 'Snowflake' },
 ];
 
+export const BANNER_HIGHLIGHTS = [
+  {
+    id: 'cervejas-balde',
+    title: 'Cerveja no Balde de Gelo',
+    subtitle: 'Heineken, Corona, Bud e Spaten',
+    category: 'cervejas',
+    icon: 'Beer',
+    tag: 'Trincando de Gelada',
+  },
+  {
+    id: 'refris-2l',
+    title: 'Refrigerantes 2 Litros',
+    subtitle: 'Coca-Cola, Fanta e Pepsi',
+    category: 'refrigerantes',
+    icon: 'CupSoda',
+    tag: 'Almoço & Churrasco',
+  },
+  {
+    id: 'petiscos-banner',
+    title: 'Doritos, Ruffles & Trident',
+    subtitle: 'Os petiscos oficiais do banner',
+    category: 'petiscos',
+    icon: 'Cookie',
+    tag: 'Crocantes & Frescos',
+  },
+  {
+    id: 'combos-galera',
+    title: 'Combos Prontos c/ Gelo',
+    subtitle: 'Whisky, Gin, Gelo e Carvão',
+    category: 'combos',
+    icon: 'Flame',
+    tag: 'Economize até 20%',
+  },
+];
+
 export const PRODUCTS = [
-  // --- CERVEJAS ---
+  // --- CERVEJAS & BALDES (Em destaque no Banner) ---
+  {
+    id: 'balde-cerveja-gelo',
+    name: 'Balde de Alumínio com 6 Long Necks Geladas + Gelo',
+    category: 'cervejas',
+    price: 54.90,
+    oldPrice: 65.00,
+    unit: 'Balde + 6 Long Necks + Gelo',
+    badge: 'Destaque do Banner',
+    isCold: true,
+    rating: 5.0,
+    description: 'Exatamente como no banner da MF! Balde de gelo caprichado com 6 Long Necks trincando de geladas (Heineken ou Stella à sua escolha).',
+    image: 'https://images.unsplash.com/photo-1518176258769-f227c798150e?w=600&auto=format&fit=crop&q=80',
+  },
   {
     id: 'heineken-longneck',
     name: 'Cerveja Heineken Long Neck 330ml',
@@ -54,7 +104,7 @@ export const PRODUCTS = [
     isCold: true,
     rating: 4.9,
     description: 'Pack com 6 latas de Heineken geladas na temperatura ideal para o seu rolê.',
-    image: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'budweiser-longneck',
@@ -76,7 +126,7 @@ export const PRODUCTS = [
     price: 9.49,
     oldPrice: 10.99,
     unit: 'Unidade 330ml',
-    badge: 'Acompanha Fatia de Limão',
+    badge: 'Acompanha Limão',
     isCold: true,
     rating: 4.9,
     description: 'Cerveja mexicana leve e refrescante. Acompanha rodela de limão fresquinho a pedido.',
@@ -106,22 +156,22 @@ export const PRODUCTS = [
     isCold: true,
     rating: 4.8,
     description: 'Criadora do estilo Munich Helles desde 1397, amargor presente e refrescante.',
-    image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=600&auto=format&fit=crop&q=80',
   },
 
   // --- COMBOS & PROMOÇÕES ---
   {
     id: 'combo-red-label',
-    name: 'Combo Sextou: Whisky Red Label + 4 Red Bulls + Gelo',
+    name: 'Combo Sextou: Whisky Red Label + 4 Red Bulls + Gelo de Coco',
     category: 'combos',
     price: 139.90,
     oldPrice: 169.90,
     unit: '1 Garrafa 1L + 4 Energéticos + Gelo de Coco',
-    badge: 'Top Promoção',
+    badge: 'Campeão de Vendas',
     isCold: true,
     rating: 5.0,
     description: '1 Garrafa de Johnnie Walker Red Label 1 Litro + 4 Red Bull Original 250ml + 2 Gelo de Coco saborizado.',
-    image: 'https://images.unsplash.com/photo-1527061011665-3652c757a4d4?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'combo-gin-tropical',
@@ -162,7 +212,7 @@ export const PRODUCTS = [
     isCold: false,
     rating: 5.0,
     description: 'Whisky escocês blended de 12 anos, notas defumadas e elegância incomparável.',
-    image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'gin-tanqueray',
@@ -175,7 +225,7 @@ export const PRODUCTS = [
     isCold: false,
     rating: 4.9,
     description: 'Destilado com 4 botânicos tradicionais para o melhor Gin & Tônica da sua vida.',
-    image: 'https://images.unsplash.com/photo-1587223075055-82e9a937ddff?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'vodka-absolut',
@@ -188,7 +238,7 @@ export const PRODUCTS = [
     isCold: false,
     rating: 4.8,
     description: 'Vodka sueca icônica, produzida com trigo de inverno e água pura de poço profundo.',
-    image: 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.unsplash.com/photo-1550985616-10810253b84d?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'campari-bitter',
@@ -204,7 +254,7 @@ export const PRODUCTS = [
     image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&auto=format&fit=crop&q=80',
   },
 
-  // --- REFRIGERANTES & SUCOS ---
+  // --- REFRIGERANTES & SUCOS (Presentes no Banner) ---
   {
     id: 'coca-cola-2l',
     name: 'Refrigerante Coca-Cola Original 2 Litros',
@@ -225,24 +275,24 @@ export const PRODUCTS = [
     price: 10.99,
     oldPrice: 12.00,
     unit: 'Garrafa PET 2L',
-    badge: 'Gelada',
+    badge: 'Super Gelada',
     isCold: true,
     rating: 4.8,
-    description: 'Refrescante, com suco natural de laranja e muito gás.',
+    description: 'Refrescante, com suco natural de laranja e muito gás. Direto do banner da MF!',
     image: 'https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'pepsi-black-2l',
-    name: 'Refrigerante Pepsi Black Zero Açúcar 2 Litros',
+    name: 'Refrigerante Pepsi Black / Cola 2 Litros',
     category: 'refrigerantes',
     price: 9.99,
     oldPrice: 11.50,
     unit: 'Garrafa PET 2L',
-    badge: 'Zero Açúcar',
+    badge: 'Destaque Banner',
     isCold: true,
     rating: 4.7,
-    description: 'Máximo sabor com zero calorias, trincando de gelada.',
-    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&auto=format&fit=crop&q=80',
+    description: 'Pepsi trincando de gelada, sabor refrescante e muito gás.',
+    image: 'https://images.unsplash.com/photo-1553456558-aff63285bdd1?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'redbull-energy',
@@ -266,11 +316,11 @@ export const PRODUCTS = [
     price: 12.90,
     oldPrice: 14.50,
     unit: 'Pacote 140g',
-    badge: 'Campeão de Vendas',
+    badge: 'Destaque do Banner',
     isCold: false,
     rating: 5.0,
-    description: 'A crocância e o sabor inconfundível do queijo nacho que todo mundo adora.',
-    image: 'https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=600&auto=format&fit=crop&q=80',
+    description: 'A crocância e o sabor inconfundível do queijo nacho que todo mundo adora. Destaque no banner da MF!',
+    image: 'https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'salgadinho-ruffles',
@@ -282,12 +332,12 @@ export const PRODUCTS = [
     badge: 'A Batata da Galera',
     isCold: false,
     rating: 4.9,
-    description: 'Batata com corte ondulado especial, crocante e na medida certa de sal.',
+    description: 'Batata com corte ondulado especial, super crocante e na medida certa de sal.',
     image: 'https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=600&auto=format&fit=crop&q=80',
   },
   {
     id: 'trident-menta',
-    name: 'Goma de Mascar Trident Menta sem Açúcar',
+    name: 'Goma de Mascar Trident Menta / Hortelã',
     category: 'petiscos',
     price: 4.50,
     oldPrice: 5.00,
@@ -295,7 +345,7 @@ export const PRODUCTS = [
     badge: 'Hálito Fresco',
     isCold: false,
     rating: 4.8,
-    description: 'Trident clássico de hortelã/menta, refrescância instantânea sem açúcar.',
+    description: 'Trident clássico de hortelã/menta, refrescância instantânea sem açúcar. No balcão da MF!',
     image: 'https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=600&auto=format&fit=crop&q=80',
   },
   {

@@ -28,7 +28,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="https://instagram.com"
+              href={STORE_CONFIG.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-full bg-stone-900 hover:bg-stone-800 border border-stone-800 text-stone-300 hover:text-pink-400 text-xs font-bold transition-colors"
@@ -38,7 +38,7 @@ export default function Footer() {
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
               </svg>
-              <span>@mfconveniencias</span>
+              <span>@{STORE_CONFIG.instagram}</span>
             </a>
           </div>
         </div>
