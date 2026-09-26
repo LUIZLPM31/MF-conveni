@@ -112,20 +112,21 @@ export default function StoreInfo() {
               </p>
             </div>
 
-            {/* Imagem / Bloco Visual PIX */}
-            <div className="p-3.5 rounded-xl bg-[#0B0F0E] border border-[#1F2925] hover:border-[#32BCAD]/40 transition-colors flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#32BCAD]/15 border border-[#32BCAD]/30 flex items-center justify-center flex-shrink-0 text-[#32BCAD]">
-                <svg className="w-6 h-6 fill-current" viewBox="0 0 512 512">
-                  <path d="M112.5 124.1c13.7-13.7 32.3-21.4 51.7-21.4h37.4l-64.8 64.8c-12.5 12.5-12.5 32.8 0 45.3l74.5 74.5-74.5 74.5c-12.5 12.5-12.5 32.8 0 45.3l64.8 64.8h-37.4c-19.4 0-38-7.7-51.7-21.4L44.8 383.2c-28.5-28.5-28.5-74.7 0-103.2l67.7-155.9zM399.5 124.1l67.7 67.7c28.5 28.5 28.5 74.7 0 103.2l-67.7 67.7c-13.7 13.7-32.3 21.4-51.7 21.4h-37.4l64.8-64.8c12.5-12.5 12.5-32.8 0-45.3l-74.5-74.5 74.5-74.5c12.5-12.5 12.5-32.8 0-45.3l-64.8-64.8h37.4c19.4 0 38 7.7 51.7 21.4z"/>
-                  <path d="M217.2 233.4l38.8-38.8 38.8 38.8c12.5 12.5 32.8 12.5 45.3 0l45.9-45.9c3.2-3.2 4.9-7.5 4.9-12.1s-1.8-8.9-4.9-12.1l-92.4-92.4c-20.9-20.9-54.8-20.9-75.7 0l-92.4 92.4c-6.7 6.7-6.7 17.5 0 24.1l45.9 45.9c12.5 12.5 32.8 12.5 45.3 0l-14.2 2.9zm77.6 45.2l-38.8 38.8-38.8-38.8c-12.5-12.5-32.8-12.5-45.3 0l-45.9 45.9c-6.7 6.7-6.7 17.5 0 24.1l92.4 92.4c20.9 20.9 54.8 20.9 75.7 0l92.4-92.4c6.7-6.7 6.7-17.5 0-24.1l-45.9-45.9c-12.5-12.5-32.8-12.5-45.3 0z"/>
-                </svg>
+            {/* Imagem / Bloco Visual Oficial PIX */}
+            <div className="p-3.5 rounded-xl bg-[#0B0F0E] border border-[#1F2925] hover:border-[#32BCAD]/50 transition-colors flex items-center gap-3.5">
+              <div className="w-16 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-[#32BCAD]/30 shadow-sm bg-[#32BCAD] flex items-center justify-center">
+                <img 
+                  src="/pix-logo.png" 
+                  alt="PIX" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-black text-[#F7F7F5] uppercase tracking-wider">PIX</span>
                   <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-[#32BCAD]/15 text-[#32BCAD] border border-[#32BCAD]/30">Instantâneo</span>
                 </div>
-                <p className="text-[11px] text-[#A8B0AC] mt-0.5">Pagamento rápido via QR Code ou Chave no balcão</p>
+                <p className="text-[11px] text-[#A8B0AC] mt-0.5">Pagamento rápido via QR Code no balcão</p>
               </div>
             </div>
 
