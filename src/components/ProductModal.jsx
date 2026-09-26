@@ -11,17 +11,17 @@ export default function ProductModal({ product, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/80 backdrop-blur-sm animate-fade-in">
-      <div className="relative w-full max-w-lg rounded-3xl bg-stone-900 border border-stone-800 p-6 sm:p-7 shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-lg rounded-2xl bg-stone-900 border border-stone-800 p-6 sm:p-7 shadow-2xl overflow-hidden">
         {/* Botão de Fechar */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-stone-950/80 hover:bg-stone-800 text-stone-300 hover:text-white transition-colors"
+          className="absolute top-4 right-4 z-10 p-2 rounded-xl bg-stone-950/80 hover:bg-stone-800 text-stone-300 hover:text-white transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Imagem do Produto */}
-        <div className="relative w-full h-56 sm:h-64 rounded-2xl overflow-hidden bg-stone-950 mb-5">
+        <div className="relative w-full h-56 sm:h-64 rounded-xl overflow-hidden bg-stone-950 mb-5">
           <img
             src={product.image}
             alt={product.name}

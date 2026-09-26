@@ -122,10 +122,10 @@ function MainContent() {
                 <button
                   key={tag.label}
                   onClick={() => handleQuickTagClick(tag.query)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? 'bg-amber-500 text-stone-950 shadow-md font-bold'
-                      : 'bg-stone-900 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800'
+                      ? 'bg-amber-500 text-stone-950 shadow-sm font-bold'
+                      : 'bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800'
                   }`}
                 >
                   {tag.label}
@@ -137,7 +137,7 @@ function MainContent() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="ml-auto flex items-center gap-1 px-2.5 py-1 rounded-full bg-stone-800 hover:bg-stone-700 text-[11px] text-stone-400 hover:text-white transition-colors flex-shrink-0"
+              className="ml-auto flex items-center gap-1 px-2.5 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-[11px] text-stone-400 hover:text-white transition-colors flex-shrink-0"
             >
               <X className="w-3 h-3" />
               <span>Limpar busca</span>
@@ -249,20 +249,19 @@ function MainContent() {
       {/* Modal do Painel de Controle ADM */}
       <AdminModal />
 
-      {/* Botão Flutuante WhatsApp Mobile / Desktop com Tooltip */}
+      {/* Botão Flutuante WhatsApp Mobile / Desktop */}
       <div className="fixed bottom-5 right-4 z-30 flex flex-col items-end gap-2 group">
         <a
           href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Olá! Gostaria de consultar a disponibilidade de bebidas na MF Conveniências.')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-xl shadow-emerald-500/40 hover:scale-105 active:scale-95 transition-all duration-200"
+          className="flex items-center gap-2 px-4 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-950/40 hover:scale-105 active:scale-95 transition-all duration-200"
           title="Falar no WhatsApp"
         >
-          <MessageCircle className="w-6 h-6" />
-          <span className="font-extrabold text-xs uppercase tracking-wider hidden sm:inline">
-            Pedir no Balcão
+          <MessageCircle className="w-5 h-5" />
+          <span className="font-bold text-xs uppercase tracking-wider hidden sm:inline">
+            Pedir no WhatsApp
           </span>
-          <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping hidden sm:inline" />
         </a>
       </div>
     </div>

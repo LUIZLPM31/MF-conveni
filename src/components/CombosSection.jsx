@@ -13,11 +13,11 @@ export default function CombosSection({ onQuickView }) {
     <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">
-            <Flame className="w-4 h-4 text-orange-500 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider mb-2">
+            <Flame className="w-4 h-4 text-orange-500" />
             <span>Mais Econômico & Completo</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-stone-100 tracking-tight">
             Combos Prontos da Galera 🔥
           </h2>
           <p className="text-xs sm:text-sm text-stone-400 mt-1">
@@ -39,16 +39,16 @@ export default function CombosSection({ onQuickView }) {
           return (
             <div
               key={combo.id}
-              className="relative rounded-3xl bg-gradient-to-b from-stone-900/90 via-stone-900 to-stone-950 border border-amber-500/30 p-5 flex flex-col justify-between hover:border-amber-400/80 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/15 group cursor-pointer"
+              className="relative rounded-2xl bg-stone-900/70 border border-stone-800 hover:border-amber-500/50 p-5 flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10 group cursor-pointer"
               onClick={() => onQuickView(combo)}
             >
               {/* Badge superior */}
               <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="px-3 py-1 rounded-full text-[11px] font-black uppercase bg-gradient-to-r from-amber-500 to-orange-500 text-stone-950 shadow-md">
+                <span className="px-3 py-1 rounded-lg text-[11px] font-bold uppercase bg-amber-500 text-stone-950 shadow-sm">
                   {combo.badge || 'Combo Especial'}
                 </span>
                 {discount && (
-                  <span className="text-xs text-amber-400 font-black flex items-center gap-1">
+                  <span className="text-xs text-amber-400 font-bold flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5" />
                     Economize {discount}%
                   </span>
@@ -56,7 +56,7 @@ export default function CombosSection({ onQuickView }) {
               </div>
 
               {/* Imagem do Combo */}
-              <div className="relative h-48 rounded-2xl overflow-hidden mb-4 bg-stone-950">
+              <div className="relative h-48 rounded-xl overflow-hidden mb-4 bg-stone-950">
                 <img
                   src={combo.image}
                   alt={combo.name}
