@@ -16,8 +16,6 @@ import {
   Database,
   KeyRound,
   CheckCircle2,
-  ExternalLink,
-  HelpCircle,
   LogOut,
   ChevronDown,
   ChevronUp
@@ -55,7 +53,6 @@ export default function AdminModal() {
     updateProduct,
     deleteProduct,
     resetToDefaultProducts,
-    syncInitialCatalogToSupabase,
     isDatabaseConnected,
     isLoadingDatabase,
     isSupabaseConfigured,
@@ -69,7 +66,7 @@ export default function AdminModal() {
   } = useProducts();
 
   // Estados locais
-  const [activeTab, setActiveTab] = useState('products'); // 'products' | 'credentials' | 'database'
+  const [activeTab, setActiveTab] = useState('products'); // 'products' | 'credentials'
   const [passwordInput, setPasswordInput] = useState('');
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [loginError, setLoginError] = useState('');
@@ -91,8 +88,6 @@ export default function AdminModal() {
   const [passwordSuccess, setPasswordSuccess] = useState('');
   const [isSavingPassword, setIsSavingPassword] = useState(false);
 
-  // Estado de sincronização
-  const [syncStatusMsg, setSyncStatusMsg] = useState('');
 
   if (!isAdminModalOpen) return null;
 
@@ -153,13 +148,6 @@ export default function AdminModal() {
     }
   };
 
-  const handleSyncToSupabase = async () => {
-    setSyncStatusMsg('Sincronizando produtos com o Supabase...');
-    const res = await syncInitialCatalogToSupabase();
-    setSyncStatusMsg(res.message);
-    showToast(res.message);
-    setTimeout(() => setSyncStatusMsg(''), 5000);
-  };
 
   const openCreateForm = () => {
     setIsEditing(true);
@@ -261,7 +249,7 @@ export default function AdminModal() {
                   Painel de Controle ADM
                 </h2>
                 <p className="text-[10px] sm:text-xs text-[#A8B0AC] truncate">
-                  Gerenciamento de produtos, banco de dados e credenciais.
+                  Gerenciamento de produtos e credenciais de acesso.
                 </p>
               </div>
             </div>
@@ -313,7 +301,7 @@ export default function AdminModal() {
               Acesso Restrito ao Administrador
             </h3>
             <p className="text-xs sm:text-sm text-[#A8B0AC] max-w-sm mb-6 leading-relaxed">
-              Insira sua senha de administrador para gerenciar o catálogo, banco de dados e credenciais da conveniência.
+              Insira sua senha de administrador para gerenciar o catálogo e credenciais da conveniência.
             </p>
 
             <form onSubmit={handleLogin} className="w-full max-w-sm space-y-4">
@@ -350,58 +338,39 @@ export default function AdminModal() {
                 )}
               </button>
 
-              <div className="pt-2">
-                <p className="text-[11px] text-[#A8B0AC]/70">
-                  Senha inicial padrão: <span className="text-[#18B66A] font-mono font-bold">admin123</span> (você pode alterá-la após entrar).
-                </p>
-              </div>
+
             </form>
           </div>
         ) : (
           /* PAINEL ADMINISTRATIVO AUTENTICADO */
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 custom-scrollbar space-y-6">
             
-            {/* Navegação por Abas — Grid 3 colunas no mobile */}
-            <div className="grid grid-cols-3 gap-1.5 border-b border-[#1F2925] pb-3">
+            {/* Navegação por Abas — 2 colunas */}
+            <div className="grid grid-cols-2 gap-2 border-b border-[#1F2925] pb-3">
               <button
                 type="button"
                 onClick={() => { setActiveTab('products'); setIsEditing(false); }}
-                className={`flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-[10px] sm:text-xs font-bold transition-all ${
+                className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                   activeTab === 'products'
                     ? 'bg-[#18B66A] text-[#0B0F0E]'
                     : 'bg-[#0B0F0E] text-[#A8B0AC] hover:text-[#F7F7F5] border border-[#1F2925]'
                 }`}
               >
                 <Package className="w-4 h-4 flex-shrink-0" />
-                <span className="truncate">Produtos ({products.length})</span>
+                <span className="truncate">Gerenciar Produtos ({products.length})</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setActiveTab('credentials')}
-                className={`flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-[10px] sm:text-xs font-bold transition-all ${
+                className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                   activeTab === 'credentials'
                     ? 'bg-[#18B66A] text-[#0B0F0E]'
                     : 'bg-[#0B0F0E] text-[#A8B0AC] hover:text-[#F7F7F5] border border-[#1F2925]'
                 }`}
               >
                 <KeyRound className="w-4 h-4 flex-shrink-0" />
-                <span className="truncate hidden sm:inline">Credenciais</span>
-                <span className="truncate sm:hidden">Senha</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab('database')}
-                className={`flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-[10px] sm:text-xs font-bold transition-all ${
-                  activeTab === 'database'
-                    ? 'bg-[#18B66A] text-[#0B0F0E]'
-                    : 'bg-[#0B0F0E] text-[#A8B0AC] hover:text-[#F7F7F5] border border-[#1F2925]'
-                }`}
-              >
-                <Database className="w-4 h-4 flex-shrink-0" />
-                <span className="truncate hidden sm:inline">Banco de Dados</span>
-                <span className="truncate sm:hidden">Banco</span>
+                <span className="truncate">Credenciais do ADM</span>
               </button>
             </div>
 
@@ -863,101 +832,7 @@ export default function AdminModal() {
               </div>
             )}
 
-            {/* ABA 3: STATUS DO BANCO DE DADOS & INSTRUÇÕES */}
-            {activeTab === 'database' && (
-              <div className="space-y-6 animate-fade-in">
-                <div className="p-6 rounded-3xl bg-[#0B0F0E] border border-[#1F2925] space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-2xl bg-[#18B66A]/10 text-[#18B66A] border border-[#18B66A]/20">
-                      <Database className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-base font-black text-[#F7F7F5]">
-                        Conexão com Banco de Dados Supabase (PostgreSQL)
-                      </h3>
-                      <p className="text-xs text-[#A8B0AC]">
-                        Armazenamento em nuvem de alta performance para produtos e credenciais da MF Conveniências.
-                      </p>
-                    </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                    {/* Card de Status */}
-                    <div className="p-4 rounded-2xl bg-[#121816] border border-[#1F2925]">
-                      <span className="text-[11px] font-bold text-[#A8B0AC] block mb-1">Status Atual:</span>
-                      <div className="flex items-center gap-2">
-                        <span className={`w-3 h-3 rounded-full ${
-                          isSupabaseConfigured && isDatabaseConnected
-                            ? 'bg-[#18B66A] animate-pulse'
-                            : 'bg-[#FFB800]'
-                        }`} />
-                        <span className="text-sm font-bold text-[#F7F7F5]">
-                          {isSupabaseConfigured && isDatabaseConnected
-                            ? 'Banco de Dados Ativo e Conectado'
-                            : 'Operando em Modo Local / Fallback'}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-[#A8B0AC] mt-2 leading-relaxed">
-                        {isSupabaseConfigured && isDatabaseConnected
-                          ? 'Suas alterações (adicionar, editar, excluir produtos e senha) são gravadas em tempo real na nuvem do Supabase.'
-                          : 'As credenciais do Supabase ainda não foram preenchidas no arquivo .env. O sistema funciona localmente sem interrupção.'}
-                      </p>
-                    </div>
-
-                    {/* Ações de Sincronização */}
-                    <div className="p-4 rounded-2xl bg-[#121816] border border-[#1F2925] flex flex-col justify-between">
-                      <div>
-                        <span className="text-[11px] font-bold text-[#A8B0AC] block mb-1">Sincronização em Massa:</span>
-                        <p className="text-[11px] text-[#A8B0AC] leading-relaxed">
-                          Deseja enviar todos os itens padrão do catálogo para a tabela do Supabase de uma vez só?
-                        </p>
-                      </div>
-
-                      <div className="pt-3">
-                        <button
-                          type="button"
-                          onClick={handleSyncToSupabase}
-                          disabled={!isSupabaseConfigured}
-                          className={`w-full py-2.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
-                            isSupabaseConfigured
-                              ? 'bg-[#18B66A] hover:bg-[#087A47] text-[#0B0F0E] shadow-md shadow-[#18B66A]/20'
-                              : 'bg-[#1F2925] text-[#A8B0AC]/40 cursor-not-allowed'
-                          }`}
-                        >
-                          <RefreshCw className="w-3.5 h-3.5" />
-                          <span>Enviar Catálogo Padrão para o Supabase</span>
-                        </button>
-                        {syncStatusMsg && (
-                          <span className="block text-[11px] text-[#18B66A] mt-1.5 text-center font-medium">
-                            {syncStatusMsg}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Passo a Passo para Conectar */}
-                  <div className="pt-4 border-t border-[#1F2925] space-y-3">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#18B66A] flex items-center gap-1.5">
-                      <HelpCircle className="w-4 h-4" />
-                      Como Conectar seu Projeto Supabase em 3 Passos:
-                    </h4>
-                    
-                    <ol className="text-xs text-[#A8B0AC] space-y-2 list-decimal list-inside leading-relaxed">
-                      <li>
-                        Crie uma conta gratuita em <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-[#18B66A] underline inline-flex items-center gap-0.5">supabase.com <ExternalLink className="w-3 h-3" /></a> e crie um novo projeto (ex: <code className="text-[#F7F7F5] bg-[#121816] px-1 py-0.5 rounded">mf-conveniencias</code>).
-                      </li>
-                      <li>
-                        No menu lateral do Supabase, clique em <strong>SQL Editor</strong> e execute o script localizado em <code className="text-[#18B66A] bg-[#121816] px-1 py-0.5 rounded font-mono">supabase/schema.sql</code> deste projeto.
-                      </li>
-                      <li>
-                        Em <strong>Project Settings &gt; API</strong>, copie a <strong>Project URL</strong> e a <strong>anon key</strong> e cole no arquivo <code className="text-[#F7F7F5] bg-[#121816] px-1 py-0.5 rounded font-mono">.env</code> do projeto.
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         )}
       </div>
