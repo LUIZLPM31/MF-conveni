@@ -1,51 +1,79 @@
 import React from 'react';
 
-export default function Logo({ size = 'normal', showSlogan = false }) {
+export default function Logo({ size = 'normal', showSlogan = false, className = '' }) {
   const isLarge = size === 'large';
+  const isSmall = size === 'small';
 
   return (
-    <div className="flex flex-col select-none">
-      <div className="flex items-center gap-2">
-        {/* Coroa Dourada e Letras MF inspiradas no banner */}
-        <div className="relative flex items-center">
+    <div className={`flex flex-col select-none ${className}`}>
+      <div className="flex items-center gap-3">
+        {/* Símbolo Próprio da Marca "MF" (Pronto para favicon, sacola, avatar, etc.) */}
+        <div
+          className={`${
+            isLarge
+              ? 'w-13 h-13 rounded-2xl'
+              : isSmall
+              ? 'w-8 h-8 rounded-lg'
+              : 'w-10 h-10 rounded-xl'
+          } relative flex-shrink-0 flex items-center justify-center bg-gradient-to-br from-[#087A47] to-[#0B0F0E] border border-[#18B66A]/40 shadow-lg shadow-[#18B66A]/10 group`}
+        >
+          {/* Coroa Dourada Minimalista da Marca */}
           <svg
-            className={`${isLarge ? 'w-10 h-8 -top-5' : 'w-7 h-5 -top-3.5'} absolute left-1 text-amber-400 drop-shadow-[0_2px_8px_rgba(245,158,11,0.6)]`}
+            className={`${
+              isLarge ? 'w-5 h-4 -top-2' : isSmall ? 'w-3 h-2.5 -top-1' : 'w-4 h-3 -top-1.5'
+            } absolute text-[#FFB800] drop-shadow-[0_1px_4px_rgba(255,184,0,0.6)]`}
             viewBox="0 0 48 32"
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M4 28L12 10L24 20L36 10L44 28L38 30H10L4 28Z" />
-            <circle cx="12" cy="8" r="3" fill="#FEF08A" />
-            <circle cx="24" cy="18" r="2.5" fill="#FEF08A" />
-            <circle cx="36" cy="8" r="3" fill="#FEF08A" />
+            <circle cx="12" cy="8" r="3" fill="#FFE082" />
+            <circle cx="24" cy="18" r="2.5" fill="#FFE082" />
+            <circle cx="36" cy="8" r="3" fill="#FFE082" />
           </svg>
 
+          {/* Letras MF com peso de marca */}
           <span
             className={`${
-              isLarge ? 'text-4xl md:text-5xl pt-2' : 'text-2xl md:text-3xl pt-1'
-            } font-black italic tracking-tighter bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-100 bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(245,158,11,0.4)] pr-1`}
+              isLarge ? 'text-xl' : isSmall ? 'text-xs' : 'text-sm'
+            } font-black tracking-tight text-[#F7F7F5] font-display`}
           >
             MF
           </span>
         </div>
 
-        <div className="flex flex-col leading-none">
+        {/* Textos da Marca: MF CONVENIÊNCIAS */}
+        <div className="flex flex-col justify-center leading-none">
+          <div className="flex items-baseline gap-1.5">
+            <span
+              className={`${
+                isLarge ? 'text-2xl sm:text-3xl' : isSmall ? 'text-sm' : 'text-lg sm:text-xl'
+              } font-black tracking-tight text-[#F7F7F5] font-display`}
+            >
+              MF
+            </span>
+            <span
+              className={`${
+                isLarge ? 'text-xs sm:text-sm tracking-[0.25em]' : isSmall ? 'text-[9px] tracking-[0.16em]' : 'text-[11px] sm:text-xs tracking-[0.2em]'
+              } font-extrabold uppercase text-[#18B66A]`}
+            >
+              CONVENIÊNCIAS
+            </span>
+          </div>
+
           <span
             className={`${
-              isLarge ? 'text-xl md:text-2xl tracking-[0.2em]' : 'text-xs md:text-sm tracking-[0.18em]'
-            } font-extrabold uppercase text-stone-100 drop-shadow-md`}
+              isLarge ? 'text-xs mt-1' : 'text-[10px] mt-0.5'
+            } text-[#A8B0AC] font-medium tracking-wide`}
           >
-            CONVENIÊNCIAS
-          </span>
-          <span className="text-[9px] md:text-[10px] text-amber-400 font-medium tracking-wider uppercase">
-            Bebidas Geladas
+            Bebidas Geladas & Praticidade
           </span>
         </div>
       </div>
 
       {showSlogan && (
-        <span className="text-xs md:text-sm font-medium italic text-amber-300/90 mt-1">
-          Bebidas Geladas & Variedade ao Seu Alcance!
+        <span className="text-xs sm:text-sm font-medium text-[#A8B0AC] mt-2">
+          Abriu a vontade? A MF resolve.
         </span>
       )}
     </div>

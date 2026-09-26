@@ -2,31 +2,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 @theme {
-  --color-brand-50: #fffbeb;
-  --color-brand-100: #fef3c7;
-  --color-brand-200: #fde68a;
-  --color-brand-300: #fcd34d;
-  --color-brand-400: #fbbf24;
-  --color-brand-500: #f59e0b;
-  --color-brand-600: #d97706;
-  --color-brand-700: #b45309;
-  --color-brand-800: #92400e;
-  --color-brand-900: #78350f;
+  --color-brand-primary: #18B66A;
+  --color-brand-dark: #087A47;
   --color-brand-gold: #FFB800;
-  --color-brand-orange: #FF5722;
+  
+  --color-surface-bg: #0B0F0E;
+  --color-surface-card: #121816;
+  --color-surface-border: #1F2925;
+  --color-surface-hover: #18221E;
 
-  --color-surface-dark: #0e1015;
-  --color-surface-card: #161922;
-  --color-surface-border: #262a38;
-  --color-surface-hover: #1e2230;
+  --color-text-white: #F7F7F5;
+  --color-text-muted: #A8B0AC;
 
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-display: "Outfit", sans-serif;
 }
 
 body {
-  background-color: #0e1015;
-  color: #f5f5f4;
+  background-color: #0B0F0E;
+  color: #F7F7F5;
   font-family: var(--font-sans);
   overflow-x: hidden;
   margin: 0;
@@ -44,31 +38,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0e1015;
+  background: #0B0F0E;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #272a38;
+  background: #1F2925;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f59e0b;
+  background: #18B66A;
 }
 
 /* Glassmorphism custom classes */
 .glass-panel {
-  background: rgba(22, 25, 34, 0.75);
+  background: rgba(18, 24, 22, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(245, 158, 11, 0.15);
+  border: 1px solid #1F2925;
 }
 
 .glass-header {
-  background: rgba(14, 16, 21, 0.9);
+  background: rgba(11, 15, 14, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .gold-gradient-text {

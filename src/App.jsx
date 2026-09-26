@@ -11,7 +11,7 @@ import AdminModal from './components/AdminModal';
 import StoreInfo from './components/StoreInfo';
 import Footer from './components/Footer';
 import { STORE_CONFIG } from './data/products';
-import { MessageCircle, Frown, Sparkles, Search, X } from 'lucide-react';
+import { MessageCircle, Frown, Sparkles, Search, X, Home, ShoppingBag } from 'lucide-react';
 
 const QUICK_TAGS = [
   { label: 'Balde de Cervejas', query: 'Balde' },
@@ -67,24 +67,24 @@ function MainContent() {
   }, [products, activeCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-[#0c0e13] text-stone-100 flex flex-col selection:bg-amber-500 selection:text-black">
+    <div className="min-h-screen bg-[#0B0F0E] text-[#F7F7F5] flex flex-col pb-16 sm:pb-0 selection:bg-[#18B66A] selection:text-black">
       {/* Barra de Notificação quando Lojista está Logado */}
       {isAdminAuthenticated && (
-        <aside aria-label="Aviso de Modo Administrador" className="bg-amber-500 text-stone-950 px-4 py-2 text-xs font-bold flex flex-wrap items-center justify-between gap-2 shadow-lg z-50 sticky top-0 border-b border-amber-600">
+        <aside aria-label="Aviso de Modo Administrador" className="bg-[#18B66A] text-[#0B0F0E] px-4 py-2 text-xs font-bold flex flex-wrap items-center justify-between gap-2 shadow-lg z-50 sticky top-0 border-b border-[#087A47]">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-stone-950 animate-ping" />
+            <span className="w-2 h-2 rounded-full bg-[#0B0F0E] animate-ping" />
             <span>Modo Administrador Ativo (Lojista)</span>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsAdminModalOpen(true)}
-              className="px-3 py-1 rounded-md bg-stone-950 text-amber-400 hover:bg-stone-900 text-xs font-black uppercase transition-colors"
+              className="px-3 py-1 rounded-md bg-[#0B0F0E] text-[#18B66A] hover:bg-stone-900 text-xs font-black uppercase transition-colors"
             >
               Abrir Painel ADM
             </button>
             <button
               onClick={logoutAdmin}
-              className="px-2 py-1 text-stone-950 hover:bg-amber-600/30 rounded text-xs font-bold transition-colors"
+              className="px-2 py-1 text-[#0B0F0E] hover:bg-white/20 rounded text-xs font-bold transition-colors"
             >
               Encerrar Sessão
             </button>
@@ -108,9 +108,9 @@ function MainContent() {
       />
 
       {/* Barra de Atalhos Rápidos de Busca (Pills do Banner) */}
-      <section className="bg-stone-950/70 border-b border-stone-800/60 py-3.5 px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#0B0F0E] border-b border-[#1F2925] py-3.5 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1">
-          <div className="flex items-center gap-1.5 text-xs text-amber-400 font-bold flex-shrink-0 pr-2">
+          <div className="flex items-center gap-1.5 text-xs text-[#18B66A] font-bold flex-shrink-0 pr-2">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Mais Buscados:</span>
           </div>
@@ -124,8 +124,8 @@ function MainContent() {
                   onClick={() => handleQuickTagClick(tag.query)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${
                     isSelected
-                      ? 'bg-amber-500 text-stone-950 shadow-sm font-bold'
-                      : 'bg-stone-900/80 hover:bg-stone-800 text-stone-300 hover:text-white border border-stone-800'
+                      ? 'bg-[#18B66A] text-[#0B0F0E] shadow-sm font-bold'
+                      : 'bg-[#121816] hover:bg-[#18221E] text-[#A8B0AC] hover:text-[#F7F7F5] border border-[#1F2925]'
                   }`}
                 >
                   {tag.label}
@@ -137,7 +137,7 @@ function MainContent() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="ml-auto flex items-center gap-1 px-2.5 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-[11px] text-stone-400 hover:text-white transition-colors flex-shrink-0"
+              className="ml-auto flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#18221E] hover:bg-[#1F2925] text-[11px] text-[#A8B0AC] hover:text-[#F7F7F5] transition-colors flex-shrink-0"
             >
               <X className="w-3 h-3" />
               <span>Limpar busca</span>
@@ -249,21 +249,52 @@ function MainContent() {
       {/* Modal do Painel de Controle ADM */}
       <AdminModal />
 
-      {/* Botão Flutuante WhatsApp Mobile / Desktop */}
-      <div className="fixed bottom-5 right-4 z-30 flex flex-col items-end gap-2 group">
+      {/* Botão Flutuante WhatsApp Desktop */}
+      <div className="hidden sm:flex fixed bottom-6 right-6 z-30 flex-col items-end gap-2 group">
         <a
-          href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Olá! Gostaria de consultar a disponibilidade de bebidas na MF Conveniências.')}`}
+          href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Olá! Gostaria de consultar o cardápio da MF Conveniências e fazer um pedido.')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-950/40 hover:scale-105 active:scale-95 transition-all duration-200"
+          className="flex items-center gap-2.5 px-5 py-3.5 rounded-2xl bg-[#18B66A] hover:bg-[#159e5c] text-[#0B0F0E] font-black text-xs uppercase tracking-wider shadow-2xl shadow-[#18B66A]/30 hover:scale-105 active:scale-95 transition-all duration-200"
           title="Falar no WhatsApp"
         >
+          <span className="w-2.5 h-2.5 rounded-full bg-[#0B0F0E] animate-pulse" />
           <MessageCircle className="w-5 h-5" />
-          <span className="font-bold text-xs uppercase tracking-wider hidden sm:inline">
-            Pedir no WhatsApp
-          </span>
+          <span>PEDIR PELO WHATSAPP</span>
         </a>
       </div>
+
+      {/* Barra de Navegação Fixa Inferior no Mobile (Bottom Bar) */}
+      <nav aria-label="Navegação Rápida Mobile" className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0B0F0E]/95 backdrop-blur-xl border-t border-[#1F2925] px-3 py-2 flex items-center justify-around shadow-2xl">
+        {/* Início */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="flex flex-col items-center gap-1 text-[#A8B0AC] hover:text-[#18B66A] text-[10px] font-bold py-1 px-3 rounded-lg transition-colors cursor-pointer"
+        >
+          <Home className="w-5 h-5 text-[#A8B0AC]" />
+          <span>Início</span>
+        </button>
+
+        {/* Produtos */}
+        <button
+          onClick={scrollToCatalog}
+          className="flex flex-col items-center gap-1 text-[#A8B0AC] hover:text-[#18B66A] text-[10px] font-bold py-1 px-3 rounded-lg transition-colors cursor-pointer"
+        >
+          <ShoppingBag className="w-5 h-5 text-[#A8B0AC]" />
+          <span>Produtos</span>
+        </button>
+
+        {/* Botão de Destaque WhatsApp */}
+        <a
+          href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Olá! Gostaria de fazer um pedido na MF Conveniências.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#18B66A] text-[#0B0F0E] text-xs font-black uppercase tracking-wider shadow-lg shadow-[#18B66A]/30 active:scale-95 transition-all"
+        >
+          <MessageCircle className="w-4 h-4" />
+          <span>WhatsApp</span>
+        </a>
+      </nav>
     </div>
   );
 }

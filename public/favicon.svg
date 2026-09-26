@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="16" fill="#161922"/>
-  <path d="M16 28L24 16L32 24L40 16L48 28L44 32H20L16 28Z" fill="#F59E0B" stroke="#FBBF24" stroke-width="1.5" stroke-linejoin="round"/>
-  <circle cx="24" cy="15" r="2.5" fill="#FDE68A"/>
-  <circle cx="32" cy="23" r="2" fill="#FDE68A"/>
-  <circle cx="40" cy="15" r="2.5" fill="#FDE68A"/>
-  <text x="32" y="52" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="900" font-style="italic" font-size="22" fill="#FFFFFF">MF</text>
+  <rect width="64" height="64" rx="16" fill="#0B0F0E"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" stroke="#18B66A" stroke-width="2" stroke-opacity="0.4"/>
+  <path d="M16 26L24 14L32 22L40 14L48 26L44 30H20L16 26Z" fill="#FFB800" stroke="#FFE082" stroke-width="1.2" stroke-linejoin="round"/>
+  <circle cx="24" cy="13" r="2.2" fill="#FFFBEB"/>
+  <circle cx="32" cy="21" r="1.8" fill="#FFFBEB"/>
+  <circle cx="40" cy="13" r="2.2" fill="#FFFBEB"/>
+  <text x="32" y="52" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="22" fill="#F7F7F5">MF</text>
 </svg>

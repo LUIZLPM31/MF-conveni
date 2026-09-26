@@ -29,151 +29,171 @@ export default function Hero({ onExploreClick, onSelectCategory }) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#0c0e13] pt-6 sm:pt-10 pb-16 px-4 sm:px-6 lg:px-8 border-b border-stone-800/80">
-      {/* Luzes de fundo atmosféricas e gradiente premium */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber-500/15 via-yellow-600/5 to-transparent blur-[140px] rounded-full pointer-events-none z-0" />
-      <div className="absolute -top-20 right-0 w-[450px] h-[450px] bg-orange-600/10 blur-[130px] rounded-full pointer-events-none z-0" />
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-amber-400/5 blur-[120px] rounded-full pointer-events-none z-0" />
+    <section className="relative overflow-hidden bg-[#0c0e13] border-b border-stone-800/80">
+      {/* 
+        IMAGEM DE FUNDO DO BANNER DA MARCA EM SEGUNDO PLANO (Estilo Simon Xpress)
+        Mostra as bebidas oficiais e o ambiente da loja no segundo plano
+      */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <img
+          src="/banner-mf.jpg"
+          alt="Banner Oficial MF Conveniências"
+          className="w-full h-full object-cover object-[55%_center] sm:object-center filter brightness-[0.78] sm:brightness-[0.82] contrast-[1.12]"
+        />
+        {/* Camadas de gradientes escuros profissionais (estilo Simon Xpress) para contraste impecável */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0c0e13] via-[#0c0e13]/80 to-[#0c0e13]/60 sm:from-[#0c0e13] sm:via-[#0c0e13]/75 sm:to-[#0c0e13]/50" />
+        <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-[#0c0e13] via-[#0c0e13]/85 via-45% to-transparent" />
+        <div className="absolute -top-10 left-1/3 w-[500px] h-[300px] bg-amber-500/15 blur-[120px] rounded-full" />
+      </div>
 
-      {/* Grid de fundo sutil para profundidade visual */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none z-0" 
-        style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, #f59e0b 1px, transparent 0)',
-          backgroundSize: '36px 36px'
-        }} 
-      />
-
-      <div className="max-w-7xl mx-auto relative z-10 space-y-10">
-        {/* Bloco Superior: Apresentação da Loja e Destaque */}
+      <div className="max-w-7xl mx-auto relative z-10 pt-8 sm:pt-14 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 space-y-10">
+        {/* Bloco Superior: Grade com Mensagem à Esquerda e Composição Visual à Direita */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Lado Esquerdo: Mensagem, Benefícios e Chamadas */}
-          <div className="lg:col-span-7 text-center lg:text-left space-y-6">
+          {/* Lado Esquerdo: Mensagem Principal Direta e Impactante */}
+          <div className="lg:col-span-7 space-y-6 text-center sm:text-left">
             
-            {/* Tag de Localização e Balcão (Sem duplicar "Loja Aberta" que já está no topo) */}
-            <div className="inline-flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+            {/* O QUE É: Tag de Identificação da Marca */}
+            <div className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#18B66A]/10 border border-[#18B66A]/30 text-[#18B66A] text-xs font-bold tracking-wide shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#18B66A] animate-pulse" />
+                <span>MF CONVENIÊNCIAS • BALCÃO & CATÁLOGO</span>
+              </span>
+
               <a
                 href={STORE_CONFIG.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-stone-900/80 hover:bg-stone-800 border border-stone-800 hover:border-amber-500/40 text-stone-300 hover:text-stone-100 text-xs font-medium transition-colors"
-                title="Ver localização no Google Maps"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#121816]/90 hover:bg-[#18221E] border border-[#1F2925] text-[#A8B0AC] hover:text-[#F7F7F5] text-xs font-medium transition-colors"
+                title="Ver no Google Maps"
               >
-                <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                <span>{STORE_CONFIG.address} — {STORE_CONFIG.city}</span>
+                <MapPin className="w-3.5 h-3.5 text-[#FFB800]" />
+                <span>{STORE_CONFIG.city}</span>
               </a>
             </div>
 
-            {/* Título Principal com destaque limpo e sem repetição de logo */}
+            {/* POR QUE COMPRAR AQUI: Headline Principal */}
             <div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-stone-100 leading-[1.12]">
-                Bebidas <span className="text-amber-400">super geladas</span> e variedade ao seu alcance
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#F7F7F5] leading-[1.08] drop-shadow-md">
+                Tudo o que você precisa.{' '}
+                <span className="text-[#18B66A] block sm:inline">Quando você precisa.</span>
               </h1>
             </div>
 
-            {/* Descrição Comercial Clara em tons neutros harmoniosos */}
-            <p className="text-stone-300 text-sm sm:text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
-              Cervejas trincando de geladas, combos completos de whisky e gin, refrigerantes 2L, gelo, carvão e petiscos crocantes (Doritos, Ruffles e Trident). Consulte o catálogo e retire direto no balcão!
+            {/* O QUE VENDE: Descrição Comercial Clara */}
+            <p className="text-[#A8B0AC] text-sm sm:text-base md:text-lg max-w-xl mx-auto sm:mx-0 leading-relaxed font-normal">
+              Bebidas geladas, snacks crocantes, doces, combos prontos e gelo. Peça no WhatsApp ou retire direto no balcão!
             </p>
 
-            {/* Ações / Botões com Hierarquia Visual Clara (Primário = WhatsApp | Secundário = Outline) */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-1">
-              {/* CTA Primário: WhatsApp (Onde a venda acontece) */}
+            {/* ASSINATURA DA MARCA */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FFB800]/10 border border-[#FFB800]/30 text-[#FFB800] text-xs sm:text-sm font-bold">
+              <span>✦</span>
+              <span>Abriu a vontade? A MF resolve.</span>
+            </div>
+
+            {/* COMO PEDIR: Ações / CTAs com Hierarquia Visual Forte */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-3.5 pt-1">
+              {/* CTA Primário: PEDIR AGORA (Verde Sólido de Conversão) */}
               <a
-                href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Olá! Gostaria de consultar a disponibilidade de bebidas e fazer um pedido na MF Conveniências.')}`}
+                href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent('Olá! Gostaria de fazer um pedido na MF Conveniências.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm tracking-wide shadow-lg shadow-emerald-950/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-[#18B66A] hover:bg-[#159e5c] text-[#0B0F0E] font-black text-sm uppercase tracking-wider shadow-lg shadow-[#18B66A]/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Pedir no WhatsApp</span>
+                <MessageCircle className="w-5 h-5" />
+                <span>PEDIR AGORA</span>
               </a>
 
-              {/* CTA Secundário: Explorar Catálogo (Contorno refinado, sem competir em peso visual) */}
+              {/* CTA Secundário: VER PRODUTOS (Outline com Glassmorphism) */}
               <button
                 onClick={onExploreClick}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-stone-900/70 hover:bg-stone-800 border border-stone-700/80 hover:border-amber-500/50 text-stone-200 hover:text-white font-semibold text-sm tracking-wide transition-all duration-200 cursor-pointer"
+                className="flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-[#121816]/80 hover:bg-[#18221E] backdrop-blur-md border border-[#1F2925] hover:border-[#18B66A]/50 text-[#F7F7F5] font-bold text-sm uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-md"
               >
-                <Snowflake className="w-4 h-4 text-amber-400" />
-                <span>Ver Bebidas Geladas</span>
-                <ArrowDown className="w-4 h-4 text-stone-400" />
+                <Snowflake className="w-4 h-4 text-[#18B66A]" />
+                <span>VER PRODUTOS</span>
+                <ArrowDown className="w-4 h-4 text-[#A8B0AC]" />
               </button>
             </div>
 
-            {/* Destaques Rápidos em Badges Padronizadas (rounded-xl) */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 max-w-lg mx-auto lg:mx-0">
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-stone-900/60 border border-stone-800/80">
-                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 flex-shrink-0">
+            {/* Badges de Destaques Rápidos */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2 max-w-lg mx-auto sm:mx-0">
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#121816]/85 backdrop-blur-md border border-[#1F2925]">
+                <div className="p-2 rounded-lg bg-[#18B66A]/10 text-[#18B66A] flex-shrink-0">
                   <Snowflake className="w-4 h-4" />
                 </div>
                 <div className="text-left min-w-0">
-                  <p className="text-xs font-bold text-stone-200">Super Gelada</p>
-                  <p className="text-[11px] text-stone-400 truncate">No ponto ideal</p>
+                  <p className="text-xs font-bold text-[#F7F7F5]">Super Geladas</p>
+                  <p className="text-[11px] text-[#A8B0AC] truncate">No ponto ideal</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-stone-900/60 border border-stone-800/80">
-                <div className="p-2 rounded-lg bg-stone-800 text-stone-300 flex-shrink-0">
+              <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#121816]/85 backdrop-blur-md border border-[#1F2925]">
+                <div className="p-2 rounded-lg bg-[#18B66A]/10 text-[#18B66A] flex-shrink-0">
                   <Clock className="w-4 h-4" />
                 </div>
                 <div className="text-left min-w-0">
-                  <p className="text-xs font-bold text-stone-200">Retirada Rápida</p>
-                  <p className="text-[11px] text-stone-400 truncate">Direto no Balcão</p>
+                  <p className="text-xs font-bold text-[#F7F7F5]">Retirada Rápida</p>
+                  <p className="text-[11px] text-[#A8B0AC] truncate">Direto no Balcão</p>
                 </div>
               </div>
 
-              <div className="col-span-2 sm:col-span-1 flex items-center gap-2.5 p-3 rounded-xl bg-stone-900/60 border border-stone-800/80">
-                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 flex-shrink-0">
+              <div className="col-span-2 sm:col-span-1 flex items-center gap-2.5 p-3 rounded-xl bg-[#121816]/85 backdrop-blur-md border border-[#1F2925]">
+                <div className="p-2 rounded-lg bg-[#FFB800]/10 text-[#FFB800] flex-shrink-0">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div className="text-left min-w-0">
-                  <p className="text-xs font-bold text-stone-200">4.9 ★ Avaliações</p>
-                  <p className="text-[11px] text-stone-400 truncate">+380 clientes</p>
+                  <p className="text-xs font-bold text-[#F7F7F5]">4.9 ★ Avaliações</p>
+                  <p className="text-[11px] text-[#A8B0AC] truncate">+380 clientes</p>
                 </div>
               </div>
             </div>
 
           </div>
 
-          {/* Lado Direito: Vitrine com Foto Real de Produto Gelado com Gotas de Condensação */}
+          {/* Lado Direito: Composição Visual com Bebidas e Iluminação Verde Profissional */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-2xl overflow-hidden border border-stone-800 bg-stone-900/70 p-2 shadow-2xl group">
+            <div className="relative rounded-2xl overflow-hidden border border-[#1F2925] bg-[#121816]/90 p-2.5 shadow-2xl group">
               
-              {/* Glow sutil ao fundo */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500/10 via-amber-600/5 to-transparent rounded-2xl blur-xl opacity-60 group-hover:opacity-90 transition-opacity -z-10" />
+              {/* Efeito Glow com Iluminação Verde da Marca */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#18B66A]/20 via-[#087A47]/20 to-transparent rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity -z-10" />
 
-              {/* Foto Real de Bebidas no Balde com Gelo e Condensação */}
-              <div className="relative rounded-xl overflow-hidden bg-stone-950 aspect-[4/3] sm:aspect-[4/3]">
+              {/* Vitrine do Produto com Enquadramento Premium */}
+              <div className="relative rounded-xl overflow-hidden bg-[#0B0F0E] aspect-[4/3]">
                 <img
                   src="/cerveja-gelada.jpg"
-                  alt="Cervejas e bebidas trincando de geladas com condensação no balde de gelo"
+                  alt="Bebidas e Cervejas Super Geladas com Condensação"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
 
-                {/* Gradiente suave inferior integrado */}
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/30 to-transparent pointer-events-none" />
+                {/* Gradiente escuro inferior */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F0E] via-[#0B0F0E]/40 to-transparent pointer-events-none" />
 
-                {/* Card Inferior integrado com acabamento limpo (sem botões berrantes concorrendo) */}
-                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-stone-900/90 backdrop-blur-md border border-stone-800 shadow-xl flex items-center justify-between gap-3">
+                {/* Badge Flutuante: MAIS PEDIDO */}
+                <div className="absolute top-3 left-3 flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#18B66A] text-[#0B0F0E] text-[11px] font-black uppercase tracking-wider shadow-lg">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>MAIS PEDIDO</span>
+                </div>
+
+                {/* Card Inferior integrado com acabamento profissional */}
+                <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-[#121816]/95 backdrop-blur-md border border-[#1F2925] shadow-xl flex items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <span className="text-[10px] font-bold tracking-wider uppercase text-amber-400 block">
-                      Trincando no Balcão
+                    <span className="text-[10px] font-black tracking-wider uppercase text-[#18B66A] block">
+                      TRINCANDO NO BALCÃO
                     </span>
-                    <p className="text-xs sm:text-sm font-bold text-stone-100 truncate">
-                      Cervejas & Bebidas Super Geladas
+                    <p className="text-xs sm:text-sm font-black text-[#F7F7F5] truncate">
+                      Cervejas & Bebidas Geladas
                     </p>
-                    <p className="text-[11px] text-stone-400 truncate">
+                    <p className="text-[11px] text-[#A8B0AC] truncate">
                       Consulte o cardápio e retire na hora
                     </p>
                   </div>
 
                   <button
                     onClick={onExploreClick}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-stone-700 hover:border-amber-500/60 bg-stone-800/80 hover:bg-stone-800 text-stone-200 hover:text-amber-400 text-xs font-semibold transition-all duration-200 flex-shrink-0 cursor-pointer"
+                    className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#18B66A]/15 hover:bg-[#18221A] border border-[#18B66A]/40 text-[#18B66A] text-xs font-bold transition-all duration-200 flex-shrink-0 cursor-pointer"
                   >
                     <span>Cardápio</span>
-                    <ArrowDown className="w-3 h-3" />
+                    <ArrowDown className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>

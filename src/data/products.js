@@ -1,6 +1,7 @@
 export const STORE_CONFIG = {
   name: "MF Conveniências",
-  slogan: "Bebidas Geladas & Variedade ao Seu Alcance!",
+  slogan: "Abriu a vontade? A MF resolve.",
+  subSlogan: "Tudo o que você precisa. Quando você precisa.",
   whatsappNumber: "5551986101352", // Número configurável
   instagram: "conveniencia_mf26",
   instagramUrl: "https://www.instagram.com/conveniencia_mf26/",
@@ -21,13 +22,13 @@ export const STORE_CONFIG = {
 };
 
 export const CATEGORIES = [
-  { id: 'todos', label: 'Todas as Ofertas', icon: 'Sparkles' },
-  { id: 'cervejas', label: 'Cervejas Trincando', icon: 'Beer' },
-  { id: 'combos', label: 'Combos & Promoções', icon: 'Flame' },
-  { id: 'destilados', label: 'Destilados & Whiskies', icon: 'Wine' },
-  { id: 'refrigerantes', label: 'Refrigerantes & Sucos', icon: 'CupSoda' },
-  { id: 'petiscos', label: 'Petiscos & Salgadinhos', icon: 'Cookie' },
-  { id: 'gelo-churrasco', label: 'Gelo, Carvão & Acessórios', icon: 'Snowflake' },
+  { id: 'todos', label: 'Mais Produtos', icon: 'Sparkles', emoji: '🛒' },
+  { id: 'refrigerantes', label: 'Bebidas', icon: 'CupSoda', emoji: '🥤' },
+  { id: 'cervejas', label: 'Geladas', icon: 'Beer', emoji: '🍺' },
+  { id: 'petiscos', label: 'Doces & Snacks', icon: 'Cookie', emoji: '🍫' },
+  { id: 'combos', label: 'Combos & Lanches', icon: 'Flame', emoji: '🍕' },
+  { id: 'gelo-churrasco', label: 'Gelo', icon: 'Snowflake', emoji: '🧊' },
+  { id: 'destilados', label: 'Destilados', icon: 'Wine', emoji: '🍾' },
 ];
 
 export const BANNER_HIGHLIGHTS = [
