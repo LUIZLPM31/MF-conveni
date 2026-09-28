@@ -24,6 +24,8 @@ export default function Hero({ onExploreClick }) {
     >
       {/* 
         IMAGEM DE FUNDO DO BANNER DA MARCA EM SEGUNDO PLANO
+        No desktop: preenche com as garrafas e bebidas em alta definição.
+        No mobile: mantido limpo e nítido com gradiente de frescor para não manchar os textos.
       */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
@@ -31,8 +33,8 @@ export default function Hero({ onExploreClick }) {
           alt="Banner Oficial MF Conveniências"
           className={`w-full h-full object-cover object-[55%_center] sm:object-center transition-all duration-300 ${
             isDark
-              ? 'brightness-[0.70] contrast-[1.15]'
-              : 'brightness-[0.88] contrast-[1.18] saturate-[1.15] opacity-80 sm:opacity-90'
+              ? 'opacity-40 sm:opacity-100 brightness-[0.70] contrast-[1.15]'
+              : 'hidden sm:block brightness-[0.88] contrast-[1.18] saturate-[1.15] sm:opacity-85'
           }`}
         />
         {/* Camadas de gradientes para contraste perfeito */}
@@ -44,11 +46,13 @@ export default function Hero({ onExploreClick }) {
           </>
         ) : (
           <>
-            {/* Gradiente refinado para manter as garrafas e bebidas nítidas e vivas sem lavar de branco */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+            {/* Desktop: gradiente lateral refinado para preservar a leitura à esquerda e exibir as garrafas à direita */}
+            <div className="hidden sm:block absolute inset-0 bg-gradient-to-t from-white via-white/35 to-transparent" />
             <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 via-40% to-transparent" />
-            <div className="sm:hidden absolute inset-0 bg-white/70 backdrop-blur-[0.5px]" />
-            <div className="absolute -top-10 left-1/3 w-[500px] h-[300px] bg-[#00509E]/10 blur-[130px] rounded-full" />
+
+            {/* Mobile: fundo limpo de refrescância diurna, sem borrões ou manchas atrás do texto */}
+            <div className="sm:hidden absolute inset-0 bg-gradient-to-b from-[#EBF5FF] via-white to-white" />
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 sm:left-1/3 w-[350px] sm:w-[500px] h-[220px] sm:h-[300px] bg-[#00509E]/10 blur-[100px] sm:blur-[130px] rounded-full pointer-events-none" />
           </>
         )}
       </div>
