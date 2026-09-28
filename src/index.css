@@ -1,30 +1,74 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-@theme {
-  --color-brand-primary: #18B66A;
-  --color-brand-dark: #087A47;
-  --color-brand-gold: #FFB800;
-  
-  --color-surface-bg: #0B0F0E;
-  --color-surface-card: #121816;
-  --color-surface-border: #1F2925;
-  --color-surface-hover: #18221E;
+:root,
+html.dark {
+  /* 1. Foco em Delivery Noturno (Dark Mode) */
+  --bg-base: #18181B; /* Preto Zinco */
+  --bg-card: #27272A; /* Card Zinco */
+  --bg-card-hover: #323238;
+  --bg-surface-elevated: #202024;
+  --bg-header-top: #141416;
+  --border-subtle: #3F3F46;
+  --border-focus: #FACC15;
 
-  --color-text-white: #F7F7F5;
-  --color-text-muted: #A8B0AC;
+  --text-main: #FAFAFA; /* Branco Gelo */
+  --text-muted: #A1A1AA;
+
+  --primary-brand: #FACC15; /* Amarelo Vibrante */
+  --primary-header: #18181B;
+  --header-text: #FAFAFA;
+  --icon-primary: #FACC15;
+  --price-color: #FACC15;
+
+  --action-bg: #FACC15; /* Botões de Ação Amarelo Cerveja */
+  --action-hover: #EAB308;
+  --action-text: #18181B; /* Contraste preto no botão amarelo */
+  --action-shadow: rgba(250, 204, 21, 0.25);
+  
+  --badge-promo-bg: #FACC15;
+  --badge-promo-text: #18181B;
 
   --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-display: "Outfit", sans-serif;
 }
 
+html.light {
+  /* 2. Refrescância e Agilidade (Light Mode) */
+  --bg-base: #FFFFFF; /* Branco Puro */
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAFC;
+  --bg-surface-elevated: #F1F5F9;
+  --bg-header-top: #003B75;
+  --border-subtle: #E2E8F0;
+  --border-focus: #00509E;
+
+  --text-main: #0F172A; /* Leitura com alto contraste */
+  --text-muted: #64748B;
+
+  --primary-brand: #00509E; /* Azul Oceano */
+  --primary-header: #00509E; /* Cabeçalho Azul Oceano */
+  --header-text: #FFFFFF;
+  --icon-primary: #00509E;
+  --price-color: #FF4500; /* Laranja Avermelhado */
+
+  --action-bg: #FF4500; /* Laranja Avermelhado - urgência e energia */
+  --action-hover: #E03E00;
+  --action-text: #FFFFFF;
+  --action-shadow: rgba(255, 69, 0, 0.3);
+
+  --badge-promo-bg: #FF4500;
+  --badge-promo-text: #FFFFFF;
+}
+
 body {
-  background-color: #0B0F0E;
-  color: #F7F7F5;
+  background-color: var(--bg-base);
+  color: var(--text-main);
   font-family: var(--font-sans);
   overflow-x: hidden;
   margin: 0;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -37,42 +81,57 @@ h1, h2, h3, h4, h5, h6 {
   height: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: #0B0F0E;
+html.dark ::-webkit-scrollbar-track {
+  background: #18181B;
 }
-
-::-webkit-scrollbar-thumb {
-  background: #1F2925;
+html.dark ::-webkit-scrollbar-thumb {
+  background: #3F3F46;
   border-radius: 4px;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: #18B66A;
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #FACC15;
 }
 
-/* Glassmorphism custom classes */
-.glass-panel {
-  background: rgba(18, 24, 22, 0.85);
+html.light ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #00509E;
+}
+
+/* Glassmorphism custom classes adaptáveis */
+html.dark .glass-panel {
+  background: rgba(39, 39, 42, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid #1F2925;
+  border: 1px solid #3F3F46;
 }
 
-.glass-header {
-  background: rgba(11, 15, 14, 0.92);
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .glass-header {
+  background: rgba(24, 24, 27, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid #3F3F46;
 }
 
-.gold-gradient-text {
-  background: linear-gradient(135deg, #FFE082 0%, #FFB300 50%, #FF8F00 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gold-gradient-badge {
-  background: linear-gradient(135deg, #FFB300 0%, #FF8F00 100%);
+html.light .glass-header {
+  background: rgba(0, 80, 158, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px -4px rgba(0, 80, 158, 0.25);
 }
 
 .no-scrollbar::-webkit-scrollbar {

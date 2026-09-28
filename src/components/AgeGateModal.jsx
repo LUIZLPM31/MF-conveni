@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldAlert, CheckCircle2, XCircle } from 'lucide-react';
+import { ShieldAlert } from 'lucide-react';
 import Logo from './Logo';
+import { useTheme } from '../context/ThemeContext';
 
 export default function AgeGateModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const isVerified = localStorage.getItem('mf_age_verified');
@@ -24,44 +26,76 @@ export default function AgeGateModal() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B0F0E]/85 backdrop-blur-md animate-fade-in">
-      <div className="relative w-full max-w-md rounded-3xl bg-[#121816] border border-[#1F2925] p-6 sm:p-8 shadow-2xl text-center">
-        {/* Glow verde sutil */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-24 bg-[#18B66A]/15 blur-3xl -z-10" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+      <div
+        className={`relative w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl text-center border ${
+          isDark
+            ? 'bg-[#27272A] border-[#3F3F46]'
+            : 'bg-white border-slate-200'
+        }`}
+      >
+        {/* Glow sutil */}
+        <div
+          className={`absolute top-0 left-1/2 -translate-x-1/2 w-48 h-24 blur-3xl -z-10 ${
+            isDark ? 'bg-[#FACC15]/15' : 'bg-[#00509E]/15'
+          }`}
+        />
 
         <div className="flex justify-center mb-4">
           <Logo size="large" />
         </div>
 
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#18B66A]/10 text-[#18B66A] mb-4 border border-[#18B66A]/30">
+        <div
+          className={`inline-flex items-center justify-center w-12 h-12 rounded-full mb-4 border ${
+            isDark
+              ? 'bg-[#FACC15]/10 text-[#FACC15] border-[#FACC15]/30'
+              : 'bg-blue-50 text-[#00509E] border-blue-200'
+          }`}
+        >
           <ShieldAlert className="w-6 h-6" />
         </div>
 
-        <h2 className="text-xl sm:text-2xl font-black text-[#F7F7F5] tracking-tight mb-2">
+        <h2
+          className={`text-xl sm:text-2xl font-black tracking-tight mb-2 ${
+            isDark ? 'text-[#FAFAFA]' : 'text-[#0F172A]'
+          }`}
+        >
           Você tem 18 anos ou mais?
         </h2>
 
-        <p className="text-[#A8B0AC] text-xs sm:text-sm leading-relaxed mb-6">
+        <p
+          className={`text-xs sm:text-sm leading-relaxed mb-6 ${
+            isDark ? 'text-[#A1A1AA]' : 'text-slate-600'
+          }`}
+        >
           Em cumprimento à legislação brasileira (Lei nº 8.069/90 e Lei nº 13.106/15), a venda de bebidas alcoólicas é proibida para menores de 18 anos.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3">
           <button
             onClick={handleReject}
-            className="w-full py-3 px-4 rounded-xl border border-[#1F2925] bg-[#0B0F0E] hover:bg-[#1a2320] text-[#A8B0AC] hover:text-[#F7F7F5] font-semibold text-sm transition-colors"
+            className={`w-full py-3 px-4 rounded-xl font-semibold text-sm transition-colors border ${
+              isDark
+                ? 'border-[#3F3F46] bg-[#18181B] hover:bg-[#323238] text-[#A1A1AA] hover:text-[#FAFAFA]'
+                : 'border-slate-200 bg-slate-100 hover:bg-slate-200 text-slate-700'
+            }`}
           >
             Não, tenho menos de 18
           </button>
 
           <button
             onClick={handleConfirm}
-            className="w-full py-3 px-4 rounded-xl bg-[#18B66A] hover:bg-[#087A47] text-[#0B0F0E] font-black text-sm uppercase tracking-wider shadow-lg shadow-[#18B66A]/25 transition-all"
+            className={`w-full py-3 px-4 rounded-xl font-black text-sm uppercase tracking-wider shadow-lg transition-all ${
+              isDark
+                ? 'bg-[#FACC15] hover:bg-[#EAB308] text-[#18181B] shadow-[#FACC15]/25'
+                : 'bg-[#00509E] hover:bg-[#003B75] text-white shadow-blue-500/25'
+            }`}
           >
             Sim, sou maior de idade
           </button>
         </div>
 
-        <p className="text-[11px] text-[#A8B0AC]/70 mt-4">
+        <p className={`text-[11px] mt-4 ${isDark ? 'text-[#A1A1AA]/70' : 'text-slate-400'}`}>
           Beba com responsabilidade. Se beber, não dirija.
         </p>
       </div>
