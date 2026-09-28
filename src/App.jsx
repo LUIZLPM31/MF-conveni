@@ -12,7 +12,7 @@ import AdminModal from './components/AdminModal';
 import StoreInfo from './components/StoreInfo';
 import Footer from './components/Footer';
 import { STORE_CONFIG } from './data/products';
-import { MessageCircle, Frown, Sparkles, X, Home, ShoppingBag } from 'lucide-react';
+import { Frown, Sparkles, X, Home, ShoppingBag } from 'lucide-react';
 
 const QUICK_TAGS = [
   { label: 'Balde de Cervejas', query: 'Balde' },
@@ -326,7 +326,7 @@ function MainContent() {
       {/* Modal do Painel de Controle ADM */}
       <AdminModal />
 
-      {/* Botão Flutuante WhatsApp Desktop */}
+      {/* Botão Flutuante WhatsApp Desktop com a imagem oficial */}
       <div className="hidden sm:flex fixed bottom-6 right-6 z-30 flex-col items-end gap-2 group">
         <a
           href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
@@ -334,16 +334,15 @@ function MainContent() {
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className={`flex items-center gap-2.5 px-5 py-3.5 rounded-2xl font-black text-xs uppercase tracking-wider shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 ${
-            isDark
-              ? 'bg-[#FACC15] hover:bg-[#EAB308] text-[#18181B] shadow-[#FACC15]/30'
-              : 'bg-[#FF4500] hover:bg-[#E03E00] text-white shadow-[#FF4500]/40'
-          }`}
+          className="flex items-center gap-2.5 px-5 py-3.5 rounded-2xl font-black text-xs uppercase tracking-wider shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-[#25D366]/40 border border-white/20"
           title="Falar no WhatsApp"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-current animate-pulse" />
-          <MessageCircle className="w-5 h-5" />
-          <span>PEDIR PELO WHATSAPP</span>
+          <img
+            src="/whatsapp-icon.png"
+            alt="WhatsApp Oficial"
+            className="w-6 h-6 rounded-md object-contain shadow-sm"
+          />
+          <span className="text-xs sm:text-sm font-black text-white tracking-wide">PEDIR PELO WHATSAPP</span>
         </a>
       </div>
 
@@ -382,20 +381,20 @@ function MainContent() {
           <span>Produtos</span>
         </button>
 
-        {/* Botão de Destaque WhatsApp */}
+        {/* Botão de Destaque WhatsApp com imagem oficial */}
         <a
           href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
             'Olá! Gostaria de fazer um pedido na MF Conveniências.'
           )}`}
           target="_blank"
           rel="noopener noreferrer"
-          className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg active:scale-95 transition-all ${
-            isDark
-              ? 'bg-[#FACC15] text-[#18181B] shadow-[#FACC15]/25'
-              : 'bg-[#FF4500] text-white shadow-[#FF4500]/30'
-          }`}
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white text-xs font-black uppercase tracking-wider shadow-lg shadow-[#25D366]/30 active:scale-95 transition-all"
         >
-          <MessageCircle className="w-4 h-4" />
+          <img
+            src="/whatsapp-icon.png"
+            alt="WhatsApp"
+            className="w-4 h-4 rounded-sm object-contain"
+          />
           <span>WhatsApp</span>
         </a>
       </nav>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Snowflake, Star, ShieldCheck, MessageCircle } from 'lucide-react';
+import { X, Snowflake, Star, ShieldCheck } from 'lucide-react';
 import { STORE_CONFIG } from '../data/products';
 import { useTheme } from '../context/ThemeContext';
 
@@ -141,13 +141,13 @@ export default function ProductModal({ product, onClose }) {
                 href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-black text-xs uppercase tracking-wider shadow-lg transition-all ${
-                  isDark
-                    ? 'bg-[#FACC15] hover:bg-[#EAB308] text-[#18181B] shadow-[#FACC15]/25'
-                    : 'bg-[#FF4500] hover:bg-[#E03E00] text-white shadow-[#FF4500]/25'
-                }`}
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-[#25D366]/25 transition-all"
               >
-                <MessageCircle className="w-4 h-4" />
+                <img
+                  src="/whatsapp-icon.png"
+                  alt="WhatsApp"
+                  className="w-4 h-4 rounded-sm object-contain"
+                />
                 <span>Pedir no WhatsApp</span>
               </a>
 

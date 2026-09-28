@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, PhoneCall, Clock, MapPin } from 'lucide-react';
+import { Search, Clock, MapPin } from 'lucide-react';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import { useProducts } from '../context/ProductContext';
@@ -151,21 +151,21 @@ export default function Navbar({ searchQuery, setSearchQuery }) {
             <span>Instagram</span>
           </a>
 
-          {/* Botão WhatsApp de Conversão Direta com a Cor de Ação do Modo */}
+          {/* Botão WhatsApp de Conversão Direta com a imagem oficial */}
           <a
             href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
               'Olá! Gostaria de fazer um pedido na MF Conveniências.'
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex items-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md ${
-              isDark
-                ? 'bg-[#FACC15] hover:bg-[#EAB308] text-[#18181B] shadow-[#FACC15]/20'
-                : 'bg-[#FF4500] hover:bg-[#E03E00] text-white shadow-[#FF4500]/30'
-            }`}
+            className="flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-md bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-[#25D366]/30 border border-white/20"
             title="Falar no WhatsApp"
           >
-            <PhoneCall className="w-3.5 h-3.5" />
+            <img
+              src="/whatsapp-icon.png"
+              alt="WhatsApp"
+              className="w-4 h-4 rounded-sm object-contain"
+            />
             <span className="hidden sm:inline">WhatsApp</span>
           </a>
         </div>

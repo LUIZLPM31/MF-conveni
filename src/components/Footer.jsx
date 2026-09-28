@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, ShieldAlert, Phone, Lock } from 'lucide-react';
+import { Heart, ShieldAlert, Lock } from 'lucide-react';
 import Logo from './Logo';
 import { STORE_CONFIG } from '../data/products';
 import { useProducts } from '../context/ProductContext';
@@ -33,13 +33,13 @@ export default function Footer() {
               href={`https://wa.me/${STORE_CONFIG.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-colors border ${
-                isDark
-                  ? 'bg-[#27272A] hover:bg-[#323238] border-[#3F3F46] text-[#A1A1AA] hover:text-[#FACC15]'
-                  : 'bg-white hover:bg-slate-100 border-slate-200 text-slate-700 hover:text-[#00509E] shadow-sm'
-              }`}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-md shadow-[#25D366]/20 border border-white/20"
             >
-              <Phone className={`w-4 h-4 ${isDark ? 'text-[#FACC15]' : 'text-[#00509E]'}`} />
+              <img
+                src="/whatsapp-icon.png"
+                alt="WhatsApp"
+                className="w-4 h-4 rounded-sm object-contain"
+              />
               <span>WhatsApp Oficial</span>
             </a>
 

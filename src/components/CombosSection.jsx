@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flame, Sparkles, MessageCircle } from 'lucide-react';
+import { Flame, Sparkles } from 'lucide-react';
 import { useProducts } from '../context/ProductContext';
 import { useTheme } from '../context/ThemeContext';
 import { STORE_CONFIG } from '../data/products';
@@ -163,14 +163,14 @@ export default function CombosSection({ onQuickView }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-xl font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-sm ${
-                    isDark
-                      ? 'bg-[#FACC15] hover:bg-[#EAB308] text-[#18181B] shadow-[#FACC15]/20'
-                      : 'bg-[#FF4500] hover:bg-[#E03E00] text-white shadow-[#FF4500]/25'
-                  }`}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-black text-xs uppercase tracking-wider transition-all duration-200 shadow-sm shadow-[#25D366]/20 border border-white/20"
                   title="Pedir no WhatsApp"
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <img
+                    src="/whatsapp-icon.png"
+                    alt="WhatsApp"
+                    className="w-4 h-4 rounded-sm object-contain"
+                  />
                   <span>PEDIR</span>
                 </a>
               </div>
