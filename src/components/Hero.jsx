@@ -29,10 +29,10 @@ export default function Hero({ onExploreClick }) {
         <img
           src="/banner-mf.jpg"
           alt="Banner Oficial MF Conveniências"
-          className={`w-full h-full object-cover object-[55%_center] sm:object-center transition-opacity duration-300 ${
+          className={`w-full h-full object-cover object-[55%_center] sm:object-center transition-all duration-300 ${
             isDark
               ? 'brightness-[0.70] contrast-[1.15]'
-              : 'brightness-[0.90] contrast-[1.05] opacity-25'
+              : 'brightness-[0.88] contrast-[1.18] saturate-[1.15] opacity-80 sm:opacity-90'
           }`}
         />
         {/* Camadas de gradientes para contraste perfeito */}
@@ -44,8 +44,10 @@ export default function Hero({ onExploreClick }) {
           </>
         ) : (
           <>
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent" />
-            <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-[#F0F7FF] via-[#F0F7FF]/90 via-45% to-transparent" />
+            {/* Gradiente refinado para manter as garrafas e bebidas nítidas e vivas sem lavar de branco */}
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+            <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 via-40% to-transparent" />
+            <div className="sm:hidden absolute inset-0 bg-white/70 backdrop-blur-[0.5px]" />
             <div className="absolute -top-10 left-1/3 w-[500px] h-[300px] bg-[#00509E]/10 blur-[130px] rounded-full" />
           </>
         )}
