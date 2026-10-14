@@ -1,170 +1,144 @@
 import React from 'react';
-import { X, Snowflake, Star, ShieldCheck } from 'lucide-react';
-import { STORE_CONFIG } from '../data/products';
-import { useTheme } from '../context/ThemeContext';
+import { Snowflake, Star, ShieldCheck, ShoppingBag } from 'lucide-react';
+import Sheet from './Sheet';
+import QuantityStepper from './QuantityStepper';
+import { useCart } from '../context/CartContext';
+import { formatBRL, discountPercent } from '../lib/format';
 
 export default function ProductModal({ product, onClose }) {
-  const { isDark } = useTheme();
+  const { addToCart, updateQuantity, getQuantity, setIsCartOpen } = useCart();
 
   if (!product) return null;
 
-  const whatsappMessage = encodeURIComponent(
-    `Olá! Gostaria de consultar a disponibilidade do item *${product.name}* na MF Conveniências.`
-  );
+  const quantity = getQuantity(product.id);
+  const discount = discountPercent(product);
+
+  const handleAddFirst = () => {
+    addToCart(product, 1);
+  };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-      <div
-        className={`relative w-full max-w-lg rounded-2xl p-6 sm:p-7 shadow-2xl overflow-hidden border ${
-          isDark
-            ? 'bg-[#27272A] border-[#3F3F46] text-[#FAFAFA]'
-            : 'bg-white border-slate-200 text-[#0F172A]'
-        }`}
-      >
-        {/* Botão de Fechar */}
-        <button
-          onClick={onClose}
-          className={`absolute top-4 right-4 z-10 p-2 rounded-xl transition-colors ${
-            isDark
-              ? 'bg-[#18181B]/80 hover:bg-[#323238] text-[#A1A1AA] hover:text-[#FAFAFA]'
-              : 'bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900'
-          }`}
-        >
-          <X className="w-5 h-5" />
-        </button>
+    <Sheet
+      open={Boolean(product)}
+      onClose={onClose}
+      title="Detalhes do Produto"
+      footer={
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex flex-col">
+            <span className="text-xs text-muted font-medium">Preço total</span>
+            <span className="text-xl font-black text-ink font-display">
+              {formatBRL(product.price * (quantity || 1))}
+            </span>
+          </div>
 
-        {/* Imagem do Produto */}
-        <div
-          className={`relative w-full h-56 sm:h-64 rounded-xl overflow-hidden mb-5 ${
-            isDark ? 'bg-[#18181B]' : 'bg-slate-100'
-          }`}
-        >
+          {quantity > 0 ? (
+            <div className="flex items-center gap-2">
+              <QuantityStepper
+                quantity={quantity}
+                size="md"
+                label={product.name}
+                onIncrement={() => updateQuantity(product.id, 1)}
+                onDecrement={() => updateQuantity(product.id, -1)}
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  setIsCartOpen(true);
+                }}
+                className="px-4 py-3 rounded-full bg-ink text-surface font-extrabold text-xs uppercase tracking-wider shadow-sm active:scale-95 transition"
+              >
+                Ver Sacola
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleAddFirst}
+              className="flex-1 py-3.5 px-6 rounded-full bg-brand hover:bg-brand-strong text-on-brand font-black text-sm uppercase tracking-wide flex items-center justify-center gap-2 shadow-md shadow-brand/20 active:scale-98 transition"
+            >
+              <ShoppingBag className="w-4 h-4 stroke-[2.5]" />
+              <span>Adicionar à Sacola</span>
+            </button>
+          )}
+        </div>
+      }
+    >
+      <div className="p-5 space-y-4">
+        {/* Imagem em destaque */}
+        <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden bg-surface-2 border border-line">
           <img
             src={product.image}
             alt={product.name}
             className="w-full h-full object-cover"
           />
 
-          {product.badge && (
-            <span
-              className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-black uppercase shadow-md ${
-                isDark ? 'bg-[#FACC15] text-[#18181B]' : 'bg-[#FF4500] text-white'
-              }`}
-            >
-              {product.badge}
-            </span>
-          )}
+          <div className="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
+            {product.badge && (
+              <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-brand text-on-brand shadow-xs">
+                {product.badge}
+              </span>
+            )}
+            {discount > 0 && (
+              <span className="px-2 py-0.5 rounded-full text-[11px] font-black bg-danger text-white shadow-xs">
+                Economize {discount}%
+              </span>
+            )}
+          </div>
 
           {product.isCold && (
-            <span
-              className={`absolute top-3 right-12 flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold border backdrop-blur-md ${
-                isDark
-                  ? 'bg-[#18181B]/80 text-[#FACC15] border-[#FACC15]/40'
-                  : 'bg-white/90 text-[#00509E] border-blue-200'
-              }`}
-            >
-              <Snowflake className={`w-3.5 h-3.5 ${isDark ? 'text-[#FACC15]' : 'text-[#00509E]'}`} />
+            <span className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-surface/90 text-ink backdrop-blur-md border border-line shadow-xs">
+              <Snowflake className="w-3.5 h-3.5 text-brand" />
               Super Gelada
             </span>
           )}
         </div>
 
-        {/* Informações */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span
-              className={`text-xs font-semibold tracking-wide uppercase ${
-                isDark ? 'text-[#FACC15]' : 'text-[#00509E]'
-              }`}
-            >
-              {product.unit}
-            </span>
-            <div className="flex items-center gap-1 text-xs text-amber-500">
+        {/* Título e Avaliação */}
+        <div>
+          <div className="flex items-center justify-between text-xs font-semibold text-muted mb-1">
+            <span>{product.unit}</span>
+            <div className="flex items-center gap-1 text-amber-500 font-bold">
               <Star className="w-3.5 h-3.5 fill-amber-500" />
-              <span>{product.rating ? Number(product.rating).toFixed(1) : '5.0'} (Avaliação)</span>
+              <span>{product.rating ? Number(product.rating).toFixed(1) : '5.0'}</span>
             </div>
           </div>
 
-          <h3
-            className={`text-xl sm:text-2xl font-black leading-tight ${
-              isDark ? 'text-[#FAFAFA]' : 'text-[#0F172A]'
-            }`}
-          >
+          <h3 className="text-xl sm:text-2xl font-black text-ink leading-tight font-display">
             {product.name}
           </h3>
+        </div>
 
-          <p className={`text-sm leading-relaxed ${isDark ? 'text-[#A1A1AA]' : 'text-slate-600'}`}>
-            {product.description}
-          </p>
+        {/* Preço Unitário */}
+        <div className="flex items-baseline gap-2 pt-1 border-t border-line">
+          {product.oldPrice && Number(product.oldPrice) > Number(product.price) && (
+            <span className="text-sm line-through text-muted/70">
+              {formatBRL(product.oldPrice)}
+            </span>
+          )}
+          <span className="text-2xl font-black text-ink font-display">
+            {formatBRL(product.price)}
+          </span>
+          <span className="text-xs text-muted font-medium">/ {product.unit}</span>
+        </div>
 
-          <div
-            className={`flex items-center gap-2 text-xs pt-1 ${
-              isDark ? 'text-[#A1A1AA]' : 'text-slate-500'
-            }`}
-          >
-            <ShieldCheck
-              className={`w-4 h-4 ${isDark ? 'text-[#FACC15]' : 'text-[#00509E]'}`}
-            />
-            <span>Produto original, lacrado e com procedência garantida.</span>
+        {/* Descrição */}
+        {product.description && (
+          <div className="bg-surface-2 p-3.5 rounded-xl border border-line">
+            <h4 className="text-xs font-bold text-ink uppercase tracking-wide mb-1">
+              Sobre o produto
+            </h4>
+            <p className="text-xs sm:text-sm text-muted leading-relaxed">
+              {product.description}
+            </p>
           </div>
+        )}
 
-          {/* Preço e Ação */}
-          <div
-            className={`pt-4 border-t flex flex-col sm:flex-row items-center justify-between gap-4 ${
-              isDark ? 'border-[#3F3F46]' : 'border-slate-100'
-            }`}
-          >
-            <div>
-              {product.oldPrice && (
-                <span
-                  className={`text-xs line-through block ${
-                    isDark ? 'text-[#A1A1AA]/60' : 'text-slate-400'
-                  }`}
-                >
-                  De: R$ {Number(product.oldPrice).toFixed(2).replace('.', ',')}
-                </span>
-              )}
-              <div className="flex items-baseline gap-1">
-                <span
-                  className={`text-2xl sm:text-3xl font-black ${
-                    isDark ? 'text-[#FACC15]' : 'text-[#FF4500]'
-                  }`}
-                >
-                  R$ {Number(product.price).toFixed(2).replace('.', ',')}
-                </span>
-              </div>
-            </div>
-
-            {/* Ações de Consulta */}
-            <div className="flex items-center gap-2.5 w-full sm:w-auto">
-              <a
-                href={`https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${whatsappMessage}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-[#25D366]/25 transition-all"
-              >
-                <img
-                  src="/whatsapp-icon.png"
-                  alt="WhatsApp"
-                  className="w-4 h-4 rounded-sm object-contain"
-                />
-                <span>Pedir no WhatsApp</span>
-              </a>
-
-              <button
-                onClick={onClose}
-                className={`px-4 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors border ${
-                  isDark
-                    ? 'bg-[#18181B] hover:bg-[#323238] text-[#A1A1AA] hover:text-[#FAFAFA] border-[#3F3F46]'
-                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border-slate-200'
-                }`}
-              >
-                Fechar
-              </button>
-            </div>
-          </div>
+        <div className="flex items-center gap-2 text-xs text-muted pt-1">
+          <ShieldCheck className="w-4 h-4 text-success flex-none" />
+          <span>Garantia de produto gelado e separado direto no balcão da MF.</span>
         </div>
       </div>
-    </div>
+    </Sheet>
   );
 }

@@ -1,34 +1,45 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CATEGORIES } from '../data/products';
-import { useTheme } from '../context/ThemeContext';
 
 export default function CategoryFilter({ activeCategory, onSelectCategory }) {
-  const { isDark } = useTheme();
+  const containerRef = useRef(null);
+
+  // Auto-scroll para manter a categoria ativa visível no chip-bar horizontal
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const activeBtn = containerRef.current.querySelector('[data-active="true"]');
+    if (activeBtn) {
+      activeBtn.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      });
+    }
+  }, [activeCategory]);
 
   return (
-    <div className="w-full overflow-x-auto no-scrollbar py-2">
-      <div className="flex items-center gap-2 sm:gap-3 min-w-max pb-1">
+    <div className="sticky top-[var(--header-h,64px)] z-30 bg-app/95 backdrop-blur-md border-b border-line py-2.5 transition-colors">
+      <div
+        ref={containerRef}
+        className="no-scrollbar max-w-6xl mx-auto px-4 flex items-center gap-2 overflow-x-auto scroll-smooth"
+      >
         {CATEGORIES.map((cat) => {
           const isActive = activeCategory === cat.id;
 
           return (
             <button
               key={cat.id}
+              type="button"
+              data-active={isActive}
               onClick={() => onSelectCategory(cat.id)}
-              className={`group flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 border cursor-pointer select-none ${
+              className={`flex-none inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-bold transition-all active:scale-95 border cursor-pointer select-none ${
                 isActive
-                  ? isDark
-                    ? 'bg-[#FACC15] text-[#18181B] border-[#FACC15] shadow-md shadow-[#FACC15]/25 scale-[1.02]'
-                    : 'bg-[#00509E] text-white border-[#00509E] shadow-md shadow-[#00509E]/25 scale-[1.02]'
-                  : isDark
-                  ? 'bg-[#27272A] hover:bg-[#323238] text-[#A1A1AA] hover:text-[#FAFAFA] border-[#3F3F46]'
-                  : 'bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 border-slate-200 shadow-sm'
+                  ? 'bg-brand text-on-brand border-brand shadow-sm font-extrabold scale-[1.02]'
+                  : 'bg-surface text-ink/80 hover:text-ink border-line hover:border-ink/20 shadow-xs'
               }`}
             >
-              <span className="text-base leading-none group-hover:scale-110 transition-transform">
-                {cat.emoji || '✨'}
-              </span>
-              <span>{cat.label}</span>
+              <span className="text-sm leading-none">{cat.emoji || '✨'}</span>
+              <span className="whitespace-nowrap">{cat.label}</span>
             </button>
           );
         })}

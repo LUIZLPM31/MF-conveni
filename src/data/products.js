@@ -8,21 +8,32 @@ export const STORE_CONFIG = {
   address: "Av. Vicente Monteggia, 2140",
   city: "Porto Alegre - RS",
   googleMapsUrl: "https://share.google/JMZOk0Qi1kspX5SlP",
-  openingHours: {
-    weekdays: "Segunda a Quinta: 16h às 00h",
-    weekend: "Sexta e Sábado: 14h às 04h (Madrugada)",
-    sunday: "Domingo e Feriados: 11h às 23h",
-    isOpenNow: true,
-  },
-  deliveryFee: 5.00,
+  // Horário de funcionamento (fonte única). Dias: 0 = Domingo ... 6 = Sábado.
+  // Quando "close" é menor ou igual a "open", o horário vira a meia-noite.
+  schedule: [
+    { days: [1, 2, 3, 4], label: 'Segunda a Quinta', open: '16:00', close: '00:00' },
+    { days: [5, 6], label: 'Sexta e Sábado', open: '14:00', close: '04:00' },
+    { days: [0], label: 'Domingo e Feriados', open: '11:00', close: '23:00' },
+  ],
   minOrder: 15.00,
   pixKey: "mfconveniencias@pix.com.br",
   rating: 4.9,
   reviewsCount: 382
 };
 
+export const POPULAR_SEARCHES = [
+  'Heineken',
+  'Balde',
+  'Combo Sextou',
+  'Coca-Cola',
+  'Gelo',
+  'Doritos',
+  'Carvão',
+  'Red Bull',
+];
+
 export const CATEGORIES = [
-  { id: 'todos', label: 'Mais Produtos', icon: 'Sparkles', emoji: '🛒' },
+  { id: 'todos', label: 'Tudo', icon: 'Sparkles', emoji: '🛒' },
   { id: 'refrigerantes', label: 'Bebidas', icon: 'CupSoda', emoji: '🥤' },
   { id: 'cervejas', label: 'Geladas', icon: 'Beer', emoji: '🍺' },
   { id: 'petiscos', label: 'Doces & Snacks', icon: 'Cookie', emoji: '🍫' },

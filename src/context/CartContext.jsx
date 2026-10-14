@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { STORE_CONFIG } from '../data/products';
+import { formatBRL, whatsappUrl } from '../lib/format';
 
 const CartContext = createContext();
 
@@ -64,6 +65,9 @@ export function CartProvider({ children }) {
     setItems([]);
   };
 
+  const getQuantity = (productId) =>
+    items.find(item => item.id === productId)?.quantity ?? 0;
+
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
 
   const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -78,7 +82,7 @@ export function CartProvider({ children }) {
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#f59e0b', '#fbbf24', '#ef4444', '#10b981', '#ffffff'],
+        colors: ['#FFC51A', '#F0B400', '#171614', '#16A34A', '#ffffff'],
       });
     } catch (e) {
       // Ignora se não carregar
@@ -95,7 +99,7 @@ export function CartProvider({ children }) {
       text += `👤 *Cliente:* ${customerName.trim()}\n`;
     }
 
-    text += `🏪 *Modalidade:* Retirada no Balcão\n`;
+    text += `🏪 *Modalidade:* Retirada no Balcão (Av. Vicente Monteggia, 2140)\n`;
 
     text += `💳 *Pagamento Pretendido:* ${paymentMethod}`;
     if (paymentMethod === 'Dinheiro' && changeFor) {
@@ -109,19 +113,17 @@ export function CartProvider({ children }) {
 
     text += `\n🛒 *ITENS SELECIONADOS:*\n`;
     items.forEach(item => {
-      text += `• *${item.quantity}x* ${item.name} (${item.unit}) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}\n`;
+      text += `• *${item.quantity}x* ${item.name} (${item.unit}) - ${formatBRL(item.price * item.quantity)}\n`;
     });
 
     text += `\n--------------------------------\n`;
-    text += `💰 *TOTAL: R$ ${total.toFixed(2).replace('.', ',')}*\n`;
+    text += `💰 *TOTAL: ${formatBRL(total)}*\n`;
     text += `--------------------------------\n`;
     text += `Favor confirmar a disponibilidade dos itens para retirada! 🍻`;
 
     triggerCelebration();
 
-    const encodedText = encodeURIComponent(text);
-    const whatsappUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodedText}`;
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl(text), '_blank');
   };
 
   return (
@@ -129,6 +131,7 @@ export function CartProvider({ children }) {
       value={{
         items,
         addToCart,
+        getQuantity,
         removeFromCart,
         updateQuantity,
         clearCart,

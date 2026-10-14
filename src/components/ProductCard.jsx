@@ -1,150 +1,107 @@
 import React from 'react';
-import { Snowflake, Star } from 'lucide-react';
-import { STORE_CONFIG } from '../data/products';
-import { useTheme } from '../context/ThemeContext';
+import { Snowflake, Plus } from 'lucide-react';
+import { useCart } from '../context/CartContext';
+import { formatBRL, discountPercent } from '../lib/format';
+import QuantityStepper from './QuantityStepper';
 
 export default function ProductCard({ product, onQuickView }) {
-  const { isDark } = useTheme();
+  const { addToCart, updateQuantity, getQuantity } = useCart();
+  const quantity = getQuantity(product.id);
+  const discount = discountPercent(product);
 
-  const whatsappUrl = `https://wa.me/${STORE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-    `Olá! Gostaria de pedir/consultar o item *${product.name}* (R$ ${Number(product.price).toFixed(2).replace('.', ',')}) na MF Conveniências.`
-  )}`;
+  const handleAdd = (e) => {
+    e.stopPropagation();
+    addToCart(product, 1);
+  };
 
   return (
     <div
       onClick={() => onQuickView(product)}
-      className={`group relative flex flex-col justify-between rounded-2xl p-3 sm:p-4 transition-all duration-300 cursor-pointer border ${
-        isDark
-          ? 'bg-[#27272A] hover:bg-[#323238] border-[#3F3F46] hover:border-[#FACC15]/60 hover:shadow-xl hover:shadow-[#FACC15]/5'
-          : 'bg-white hover:bg-slate-50/80 border-slate-200 hover:border-[#00509E]/50 shadow-sm hover:shadow-xl hover:shadow-slate-300/40'
-      }`}
+      className="group relative flex flex-col justify-between rounded-2xl bg-surface border border-line p-3 sm:p-3.5 shadow-xs hover:shadow-md transition-all active:scale-[0.99] cursor-pointer"
     >
-      {/* Imagem Protagonista do Produto com Badges */}
-      <div
-        className={`relative w-full aspect-square rounded-xl overflow-hidden mb-3 ${
-          isDark ? 'bg-[#18181B]' : 'bg-slate-100'
-        }`}
-      >
+      {/* Imagem do Produto */}
+      <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-surface-2 mb-2.5">
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-500"
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
 
-        <div
-          className={`absolute inset-0 transition-opacity ${
-            isDark
-              ? 'bg-gradient-to-t from-[#18181B]/80 via-transparent to-transparent opacity-60 group-hover:opacity-30'
-              : 'bg-gradient-to-t from-slate-900/30 via-transparent to-transparent opacity-40 group-hover:opacity-20'
-          }`}
-        />
+        {/* Badges superiores */}
+        <div className="absolute top-2 left-2 flex flex-col gap-1 items-start">
+          {product.badge && (
+            <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-brand text-on-brand shadow-xs">
+              {product.badge}
+            </span>
+          )}
+          {discount > 0 && (
+            <span className="px-1.5 py-0.5 rounded-md text-[9px] font-extrabold bg-danger text-white shadow-xs">
+              -{discount}%
+            </span>
+          )}
+        </div>
 
-        {/* Badge Principal Consistente (NOVO, PROMO, MAIS VENDIDO) */}
-        {product.badge && (
-          <span
-            className={`absolute top-2.5 left-2.5 px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-wider shadow-sm ${
-              isDark
-                ? 'bg-[#FACC15] text-[#18181B]'
-                : 'bg-[#FF4500] text-white'
-            }`}
-          >
-            {product.badge}
-          </span>
-        )}
-
-        {/* Indicador de Super Gelada */}
         {product.isCold && (
           <span
-            className={`absolute top-2.5 right-2.5 flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold backdrop-blur-md shadow-sm border ${
-              isDark
-                ? 'bg-[#18181B]/85 text-[#FACC15] border-[#FACC15]/30'
-                : 'bg-white/90 text-[#00509E] border-blue-200'
-            }`}
-            title="Trincando de gelada"
+            className="absolute top-2 right-2 flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[10px] font-bold bg-surface/90 text-ink backdrop-blur-xs border border-line shadow-xs"
+            title="Super Gelada"
           >
-            <Snowflake className={`w-3 h-3 ${isDark ? 'text-[#FACC15]' : 'text-[#00509E]'}`} />
+            <Snowflake className="w-3 h-3 text-brand" />
             <span className="hidden sm:inline">GELADA</span>
           </span>
         )}
       </div>
 
-      {/* Detalhes do Produto */}
+      {/* Conteúdo */}
       <div className="flex flex-col flex-1">
-        <div className="flex items-center justify-between text-[11px] font-semibold mb-1">
-          <span
-            className={`font-normal truncate max-w-[120px] ${
-              isDark ? 'text-[#A1A1AA]' : 'text-slate-500'
-            }`}
-          >
-            {product.unit}
-          </span>
-          <div className="flex items-center gap-1 text-amber-500">
-            <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
-            <span className={isDark ? 'text-[#FAFAFA]' : 'text-slate-700'}>
-              {product.rating ? Number(product.rating).toFixed(1) : '5.0'}
-            </span>
-          </div>
-        </div>
+        <span className="text-[11px] font-medium text-muted mb-0.5 truncate">
+          {product.unit}
+        </span>
 
-        <h3
-          className={`text-sm sm:text-base font-bold line-clamp-2 leading-snug transition-colors mb-1.5 font-display ${
-            isDark
-              ? 'text-[#FAFAFA] group-hover:text-[#FACC15]'
-              : 'text-[#0F172A] group-hover:text-[#00509E]'
-          }`}
-        >
+        <h3 className="text-xs sm:text-sm font-extrabold text-ink line-clamp-2 leading-snug mb-1 font-sans">
           {product.name}
         </h3>
 
-        <p
-          className={`text-xs line-clamp-2 mb-3 leading-relaxed hidden sm:block ${
-            isDark ? 'text-[#A1A1AA]' : 'text-slate-500'
-          }`}
-        >
-          {product.description}
-        </p>
-
-        {/* Preço e Botão Consistente "PEDIR +" */}
-        <div
-          className={`mt-auto pt-3 border-t flex items-center justify-between gap-2 ${
-            isDark ? 'border-[#3F3F46]' : 'border-slate-100'
-          }`}
-        >
-          <div>
-            {product.oldPrice && (
-              <span
-                className={`block text-[11px] line-through leading-none mb-0.5 ${
-                  isDark ? 'text-[#A1A1AA]/70' : 'text-slate-400'
-                }`}
-              >
-                R$ {Number(product.oldPrice).toFixed(2).replace('.', ',')}
+        {/* Rodapé do Card: Preço e Botão Stepper estilo Zé Delivery */}
+        <div className="mt-auto pt-2 flex items-end justify-between gap-1.5">
+          <div className="flex flex-col">
+            {product.oldPrice && Number(product.oldPrice) > Number(product.price) && (
+              <span className="text-[10px] sm:text-[11px] line-through text-muted/80 leading-none">
+                {formatBRL(product.oldPrice)}
               </span>
             )}
-            <span
-              className={`text-base sm:text-xl font-black leading-none ${
-                isDark ? 'text-[#FACC15]' : 'text-[#FF4500]'
-              }`}
-            >
-              R$ {Number(product.price).toFixed(2).replace('.', ',')}
+            <span className="text-sm sm:text-base font-black text-ink leading-tight font-display">
+              {formatBRL(product.price)}
             </span>
           </div>
 
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className={`flex items-center gap-1 px-3 sm:px-3.5 py-2 rounded-xl font-black text-[11px] uppercase tracking-wider transition-all duration-200 shadow-sm hover:scale-[1.03] active:scale-[0.98] cursor-pointer ${
-              isDark
-                ? 'bg-[#FACC15] hover:bg-[#EAB308] text-[#18181B] shadow-[#FACC15]/20'
-                : 'bg-[#FF4500] hover:bg-[#E03E00] text-white shadow-[#FF4500]/25'
-            }`}
-            title="Pedir no WhatsApp"
-          >
-            <span>PEDIR</span>
-            <span className="text-sm leading-none font-black">+</span>
-          </a>
+          <div className="flex-none">
+            {quantity > 0 ? (
+              <QuantityStepper
+                quantity={quantity}
+                size="sm"
+                label={product.name}
+                onIncrement={(e) => {
+                  e?.stopPropagation();
+                  updateQuantity(product.id, 1);
+                }}
+                onDecrement={(e) => {
+                  e?.stopPropagation();
+                  updateQuantity(product.id, -1);
+                }}
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={handleAdd}
+                aria-label={`Adicionar ${product.name} à sacola`}
+                className="w-8 h-8 rounded-full bg-brand hover:bg-brand-strong text-on-brand flex items-center justify-center font-bold shadow-xs active:scale-90 transition-transform cursor-pointer"
+              >
+                <Plus className="w-4 h-4 stroke-[2.5]" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

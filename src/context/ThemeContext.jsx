@@ -2,28 +2,27 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
+const THEME_COLORS = { light: '#FFC51A', dark: '#1C1B19' };
+
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    // 1. Tentar pegar do localStorage
+    // 1. Respeitar a escolha salva do cliente
     const savedTheme = localStorage.getItem('mf_conveni_theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
       return savedTheme;
     }
-    // Padrão ouro: Delivery Noturno (Dark)
-    return 'dark';
+    // 2. Padrão: claro, no estilo dos apps de delivery
+    return 'light';
   });
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'light') {
-      root.classList.remove('dark');
-      root.classList.add('light');
-      root.setAttribute('data-theme', 'light');
-    } else {
-      root.classList.remove('light');
-      root.classList.add('dark');
-      root.setAttribute('data-theme', 'dark');
-    }
+    root.classList.toggle('dark', theme === 'dark');
+    root.classList.toggle('light', theme === 'light');
+    root.setAttribute('data-theme', theme);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', THEME_COLORS[theme]);
     localStorage.setItem('mf_conveni_theme', theme);
   }, [theme]);
 
