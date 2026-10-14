@@ -69,7 +69,7 @@ export default function PromoCarousel({ onSelectCategory }) {
   };
 
   return (
-    <section aria-label="Destaques" className="mx-auto max-w-6xl pt-4">
+    <section aria-label="Destaques" className="w-full max-w-6xl mx-auto pt-3 pb-1">
       <div
         ref={trackRef}
         onScroll={handleScroll}
@@ -82,7 +82,7 @@ export default function PromoCarousel({ onSelectCategory }) {
             key={banner.id}
             type="button"
             onClick={() => onSelectCategory(banner.category)}
-            className="group relative aspect-[16/9] w-[88%] flex-none snap-start overflow-hidden rounded-3xl bg-surface-2 text-left shadow-lg shadow-black/10 sm:aspect-[21/9] sm:w-[70%] lg:w-[48%]"
+            className="group relative shrink-0 snap-start overflow-hidden rounded-2xl sm:rounded-3xl bg-surface-2 text-left shadow-md shadow-black/10 transition-transform active:scale-[0.98] w-[85vw] max-w-[420px] h-44 sm:h-52 sm:w-[420px] md:h-56 md:w-[460px] cursor-pointer"
             aria-label={`${banner.title.replace('\n', ' ')} — ${banner.cta}`}
           >
             <img
@@ -90,19 +90,19 @@ export default function PromoCarousel({ onSelectCategory }) {
               alt=""
               loading={index === 0 ? 'eager' : 'lazy'}
               fetchPriority={index === 0 ? 'high' : 'auto'}
-              className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/35 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-              <span className="inline-block rounded-full bg-brand px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide text-on-brand">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex flex-col justify-end">
+              <span className="inline-block self-start rounded-full bg-brand px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-on-brand shadow-xs">
                 {banner.eyebrow}
               </span>
-              <p className="mt-2 whitespace-pre-line font-display text-[22px] font-extrabold leading-[1.1] text-white sm:text-3xl">
+              <p className="mt-2 whitespace-pre-line font-display text-xl sm:text-2xl font-black leading-tight text-white drop-shadow-sm">
                 {banner.title}
               </p>
-              <span className="mt-2.5 inline-flex items-center gap-1 text-sm font-bold text-white/90">
+              <span className="mt-2 inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-white/95">
                 {banner.cta}
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </span>
             </div>
           </button>
