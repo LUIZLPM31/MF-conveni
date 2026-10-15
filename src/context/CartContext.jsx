@@ -124,6 +124,18 @@ export function CartProvider({ children }) {
     triggerCelebration();
 
     window.open(whatsappUrl(text), '_blank');
+
+    // Pedido enviado: reinicia a sacola para um novo pedido
+    resetOrder();
+  };
+
+  const resetOrder = () => {
+    setItems([]);
+    setCustomerName('');
+    setPaymentMethod('PIX');
+    setChangeFor('');
+    setNotes('');
+    setIsCartOpen(false);
   };
 
   return (
@@ -150,6 +162,7 @@ export function CartProvider({ children }) {
         notes,
         setNotes,
         sendOrderToWhatsApp,
+        resetOrder,
         triggerCelebration
       }}
     >
