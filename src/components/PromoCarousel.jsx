@@ -11,11 +11,11 @@ const BANNERS = [
     category: 'todos',
   },
   {
-    id: 'geladas',
+    id: 'sinuca',
     image: '/cerveja-gelada.jpg',
-    eyebrow: 'Trincando de gelada',
-    title: 'Cervejas no ponto\npra retirar agora',
-    cta: 'Ver geladas',
+    eyebrow: 'Mesa de Sinuca',
+    title: 'Aquela partida de sinuca\ncom cerveja gelada',
+    cta: 'Vem pro rolê',
     category: 'cervejas',
   },
   {
